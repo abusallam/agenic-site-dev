@@ -7,15 +7,16 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Menu, Bot, User, Home, MessageSquare, Globe, ChevronDown } from "lucide-react"
 import { useTranslation } from "@/lib/i18n"
-import Image from "next/image"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [currentPath, setCurrentPath] = useState("/")
+  const [mounted, setMounted] = useState(false)
   const { t, locale, changeLanguage } = useTranslation()
 
   useEffect(() => {
+    setMounted(true)
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
     }
@@ -30,11 +31,30 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Don't render until mounted to avoid hydration issues
+  if (!mounted) {
+    return (
+      <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center space-x-3">
+            <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
+              <span className="text-white font-bold text-sm">MC</span>
+            </div>
+            <span className="font-bold text-xl">main.consulting.sa</span>
+          </Link>
+          <div className="hidden md:flex items-center space-x-6">
+            <Button>Get Started</Button>
+          </div>
+        </div>
+      </nav>
+    )
+  }
+
   const navItems = [
-    { href: "/", label: t("nav.home") || "Home", icon: Home },
-    { href: "/ai-agents", label: t("nav.aiAgents") || "AI Agents", icon: Bot },
-    { href: "/chatbots", label: t("nav.chatbots") || "Chatbots", icon: MessageSquare },
-    { href: "/consulting", label: t("nav.consulting") || "Consulting", icon: User },
+    { href: "/", label: t("nav.home"), icon: Home },
+    { href: "/ai-agents", label: t("nav.aiAgents"), icon: Bot },
+    { href: "/chatbots", label: t("nav.chatbots"), icon: MessageSquare },
+    { href: "/consulting", label: t("nav.consulting"), icon: User },
   ]
 
   const isActive = (href: string) => {
@@ -46,9 +66,6 @@ export function Navigation() {
       changeLanguage(newLocale)
     } catch (error) {
       console.error("Error changing language:", error)
-      // Fallback: reload page with language preference
-      localStorage.setItem("locale", newLocale)
-      window.location.reload()
     }
   }
 
@@ -63,21 +80,7 @@ export function Navigation() {
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center space-x-3 group">
           <div className="relative h-10 w-10 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
-            <Image
-              src="/main-consulting-logo.svg"
-              alt="Main Consulting Logo"
-              width={24}
-              height={24}
-              className="text-white"
-              onError={(e) => {
-                // Fallback to text logo if image fails to load
-                const target = e.target as HTMLImageElement
-                target.style.display = "none"
-                const fallback = target.nextElementSibling as HTMLElement
-                if (fallback) fallback.style.display = "block"
-              }}
-            />
-            <span className="text-white font-bold text-sm hidden">MC</span>
+            <span className="text-white font-bold text-sm">MC</span>
           </div>
           <div className="flex flex-col">
             <span className="font-bold text-xl font-heading bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -107,7 +110,7 @@ export function Navigation() {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="flex items-center space-x-1">
                 <Globe className="h-4 w-4" />
-                <span className="text-sm font-medium">{(locale || "EN").toUpperCase()}</span>
+                <span className="text-sm font-medium">{locale.toUpperCase()}</span>
                 <ChevronDown className="h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
@@ -130,13 +133,12 @@ export function Navigation() {
           </DropdownMenu>
 
           <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
-            {t("nav.getStarted") || "Get Started"}
+            {t("nav.getStarted")}
           </Button>
         </div>
 
         {/* Mobile Navigation */}
         <div className="flex items-center space-x-2 md:hidden">
-          {/* Mobile Language Switcher */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm">
@@ -179,7 +181,7 @@ export function Navigation() {
                 ))}
 
                 <Button className="mt-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
-                  {t("nav.getStarted") || "Get Started"}
+                  {t("nav.getStarted")}
                 </Button>
               </div>
             </SheetContent>
