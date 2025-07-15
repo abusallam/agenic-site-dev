@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect, createContext, useContext } from "react"
 
 type Locale = "en" | "ar"
@@ -122,7 +121,7 @@ export function useEnhancedTranslation() {
     // Fallback for when context is not available
     return {
       locale: "en" as Locale,
-      t: (key: string) => translations.en[key as keyof typeof translations.en] || key,
+      t: (key: string) => translations.en[key as keyof (typeof translations)["en"]] || key,
       changeLanguage: () => {},
       isRTL: false,
     }

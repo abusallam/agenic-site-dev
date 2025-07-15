@@ -1,8 +1,8 @@
 import { EnhancedHeroSection } from "@/components/hero-section-enhanced"
-import { ServicesSection } from "@/components/services-section"
-import { FeaturesSection } from "@/components/features-section"
-import { TestimonialsSection } from "@/components/testimonials-section"
-import { CTASection } from "@/components/cta-section"
+import { EnhancedServicesSection } from "@/components/services-section-enhanced" // Assuming this component exists or will be created
+import { EnhancedConsultingSection } from "@/components/consulting/consulting-hero-enhanced" // Assuming this component exists or will be created
+import { EnhancedTestimonialsSection } from "@/components/testimonials-section-enhanced" // Assuming this component exists or will be created
+import { EnhancedContactSection } from "@/components/contact-section-enhanced" // Assuming this component exists or will be created
 
 export const metadata = {
   title: "Home - AI Solutions & Expert Consulting",
@@ -15,11 +15,11 @@ export default function HomePage() {
     <div className="flex flex-col">
       <EnhancedHeroSection />
       <div id="services">
-        <ServicesSection />
+        <EnhancedServicesSection />
       </div>
-      <FeaturesSection />
-      <TestimonialsSection />
-      <CTASection />
+      <EnhancedConsultingSection />
+      <EnhancedTestimonialsSection />
+      <EnhancedContactSection />
     </div>
   )
 }
