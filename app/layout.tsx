@@ -1,10 +1,12 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Inter, Poppins } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { ErrorBoundary } from "@/components/error-boundary"
+import { ThemeProvider } from "@/components/theme-provider-enhanced"
+import { EnhancedNavigation } from "@/components/navigation-enhanced"
+import { EnhancedFooter } from "@/components/footer-enhanced"
 import { Toaster } from "@/components/ui/toaster"
+import { brandConfig } from "@/lib/brand"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -12,41 +14,69 @@ const inter = Inter({
   display: "swap",
 })
 
-const playfair = Playfair_Display({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
   display: "swap",
 })
 
 export const metadata: Metadata = {
-  title: "Main Consulting - AI Solutions & Expert Consulting",
-  description:
-    "Professional AI consulting services and cutting-edge SaaS solutions for AI agents and chatbots by Asim Abu Salam",
-  keywords: "AI consulting, chatbots, AI agents, SaaS, Asim Abu Salam, artificial intelligence, automation",
-  authors: [{ name: "Asim Abu Salam" }],
-  creator: "Main Consulting",
-  publisher: "Main Consulting",
+  title: {
+    default: `${brandConfig.name} - ${brandConfig.tagline}`,
+    template: `%s | ${brandConfig.name}`,
+  },
+  description: brandConfig.description,
+  keywords: [
+    "AI consulting",
+    "artificial intelligence",
+    "machine learning",
+    "AI agents",
+    "chatbots",
+    "automation",
+    "digital transformation",
+    "Saudi Arabia",
+    "consulting services",
+  ],
+  authors: [{ name: brandConfig.founder }],
+  creator: brandConfig.founder,
+  publisher: brandConfig.name,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://main.consulting.sa"),
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/en",
+      "ar-SA": "/ar",
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
+    alternateLocale: "ar_SA",
     url: "https://main.consulting.sa",
-    title: "Main Consulting - AI Solutions & Expert Consulting",
-    description: "Professional AI consulting services and cutting-edge SaaS solutions for AI agents and chatbots",
-    siteName: "Main Consulting",
+    siteName: brandConfig.name,
+    title: `${brandConfig.name} - ${brandConfig.tagline}`,
+    description: brandConfig.description,
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Main Consulting - AI Solutions",
+        alt: `${brandConfig.name} - AI Solutions & Expert Consulting`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Main Consulting - AI Solutions & Expert Consulting",
-    description: "Professional AI consulting services and cutting-edge SaaS solutions",
+    title: `${brandConfig.name} - ${brandConfig.tagline}`,
+    description: brandConfig.description,
     images: ["/og-image.jpg"],
+    creator: "@mainconsulting",
   },
   robots: {
     index: true,
@@ -59,7 +89,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  generator: "v0.dev",
+  verification: {
+    google: "your-google-verification-code",
+    yandex: "your-yandex-verification-code",
+  },
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -68,22 +102,24 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#1e40af" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#3b82f6" />
+        <meta name="color-scheme" content="light dark" />
       </head>
-      <body className={`${inter.className} antialiased`}>
-        <ErrorBoundary>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-            {children}
-            <Toaster />
-          </ThemeProvider>
-        </ErrorBoundary>
+      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <div className="relative flex min-h-screen flex-col">
+            <EnhancedNavigation />
+            <main className="flex-1">{children}</main>
+            <EnhancedFooter />
+          </div>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )
