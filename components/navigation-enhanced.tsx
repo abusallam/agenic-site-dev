@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {
@@ -29,17 +29,15 @@ import {
   Moon,
 } from "lucide-react"
 import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
-import { brandConfig } from "@/lib/brand"
 import { useTheme } from "next-themes"
 
 export function EnhancedNavigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [currentPath, setCurrentPath] = useState("/")
   const [mounted, setMounted] = useState(false)
   const { t, locale, changeLanguage, isRTL } = useEnhancedTranslation()
   const { theme, setTheme } = useTheme()
-  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
@@ -47,13 +45,7 @@ export function EnhancedNavigation() {
       setIsScrolled(window.scrollY > 10)
     }
 
-    const updatePath = () => {
-      setCurrentPath(window.location.pathname)
-    }
-
     window.addEventListener("scroll", handleScroll)
-    updatePath()
-
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -63,9 +55,9 @@ export function EnhancedNavigation() {
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-3">
             <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">{brandConfig.logo.text}</span>
+              <span className="text-white font-bold text-sm">MC</span>
             </div>
-            <span className="font-bold text-xl">{brandConfig.logo.full}</span>
+            <span className="font-bold text-xl">main.consulting.sa</span>
           </Link>
           <div className="hidden md:flex items-center space-x-6">
             <Button>Get Started</Button>
@@ -90,15 +82,11 @@ export function EnhancedNavigation() {
   ]
 
   const isActive = (href: string) => {
-    return currentPath === href
+    return pathname === href
   }
 
   const handleLanguageChange = (newLocale: "en" | "ar") => {
-    try {
-      changeLanguage(newLocale)
-    } catch (error) {
-      console.error("Error changing language:", error)
-    }
+    changeLanguage(newLocale)
   }
 
   const toggleTheme = () => {
@@ -120,13 +108,13 @@ export function EnhancedNavigation() {
           className={`flex items-center space-x-3 group ${isRTL ? "flex-row-reverse space-x-reverse" : ""}`}
         >
           <div className="relative h-10 w-10 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center group-hover:scale-105 transition-transform duration-200 shadow-lg">
-            <span className="text-white font-bold text-sm">{brandConfig.logo.text}</span>
+            <span className="text-white font-bold text-sm">MC</span>
           </div>
           <div className="flex flex-col">
             <span className="font-bold text-xl font-heading bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              {brandConfig.logo.full}
+              main.consulting.sa
             </span>
-            <span className="text-xs text-muted-foreground -mt-1">{brandConfig.tagline}</span>
+            <span className="text-xs text-muted-foreground -mt-1">AI Solutions & Expert Consulting</span>
           </div>
         </Link>
 
@@ -263,11 +251,11 @@ export function EnhancedNavigation() {
                   className={`flex items-center space-x-3 pb-4 border-b ${isRTL ? "flex-row-reverse space-x-reverse" : ""}`}
                 >
                   <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">{brandConfig.logo.text}</span>
+                    <span className="text-white font-bold text-sm">MC</span>
                   </div>
                   <div className="flex flex-col">
-                    <span className="font-bold text-lg">{brandConfig.logo.full}</span>
-                    <span className="text-xs text-muted-foreground">{brandConfig.tagline}</span>
+                    <span className="font-bold text-lg">main.consulting.sa</span>
+                    <span className="text-xs text-muted-foreground">AI Solutions & Expert Consulting</span>
                   </div>
                 </div>
 

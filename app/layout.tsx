@@ -2,11 +2,11 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Poppins } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider-enhanced"
+import { ThemeProvider } from "next-themes"
+import { TranslationProvider } from "@/lib/i18n-enhanced"
 import { EnhancedNavigation } from "@/components/navigation-enhanced"
 import { EnhancedFooter } from "@/components/footer-enhanced"
 import { Toaster } from "@/components/ui/toaster"
-import { brandConfig } from "@/lib/brand"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,10 +23,11 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: `${brandConfig.name} - ${brandConfig.tagline}`,
-    template: `%s | ${brandConfig.name}`,
+    default: "main.consulting.sa - AI Solutions & Expert Consulting",
+    template: "%s | main.consulting.sa",
   },
-  description: brandConfig.description,
+  description:
+    "Professional AI consulting services and cutting-edge SaaS solutions for AI agents and chatbots by Asim Abu Salam",
   keywords: [
     "AI consulting",
     "artificial intelligence",
@@ -37,10 +38,11 @@ export const metadata: Metadata = {
     "digital transformation",
     "Saudi Arabia",
     "consulting services",
+    "Asim Abu Salam",
   ],
-  authors: [{ name: brandConfig.founder }],
-  creator: brandConfig.founder,
-  publisher: brandConfig.name,
+  authors: [{ name: "Asim Abu Salam" }],
+  creator: "Asim Abu Salam",
+  publisher: "main.consulting.sa",
   formatDetection: {
     email: false,
     address: false,
@@ -59,22 +61,22 @@ export const metadata: Metadata = {
     locale: "en_US",
     alternateLocale: "ar_SA",
     url: "https://main.consulting.sa",
-    siteName: brandConfig.name,
-    title: `${brandConfig.name} - ${brandConfig.tagline}`,
-    description: brandConfig.description,
+    siteName: "main.consulting.sa",
+    title: "main.consulting.sa - AI Solutions & Expert Consulting",
+    description: "Professional AI consulting services and cutting-edge SaaS solutions for AI agents and chatbots",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: `${brandConfig.name} - AI Solutions & Expert Consulting`,
+        alt: "main.consulting.sa - AI Solutions & Expert Consulting",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${brandConfig.name} - ${brandConfig.tagline}`,
-    description: brandConfig.description,
+    title: "main.consulting.sa - AI Solutions & Expert Consulting",
+    description: "Professional AI consulting services and cutting-edge SaaS solutions",
     images: ["/og-image.jpg"],
     creator: "@mainconsulting",
   },
@@ -88,10 +90,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
   },
     generator: 'v0.dev'
 }
@@ -113,12 +111,14 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <div className="relative flex min-h-screen flex-col">
-            <EnhancedNavigation />
-            <main className="flex-1">{children}</main>
-            <EnhancedFooter />
-          </div>
-          <Toaster />
+          <TranslationProvider>
+            <div className="relative flex min-h-screen flex-col">
+              <EnhancedNavigation />
+              <main className="flex-1">{children}</main>
+              <EnhancedFooter />
+            </div>
+            <Toaster />
+          </TranslationProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -101,13 +101,13 @@ export function EnhancedFooter() {
               className={`flex items-center space-x-3 mb-6 ${isRTL ? "flex-row-reverse space-x-reverse" : ""}`}
             >
               <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-sm">{brandConfig.logo.text}</span>
+                <span className="text-white font-bold text-sm">MC</span>
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  {brandConfig.logo.full}
+                  main.consulting.sa
                 </span>
-                <span className="text-xs text-gray-400">{brandConfig.tagline}</span>
+                <span className="text-xs text-gray-400">AI Solutions & Expert Consulting</span>
               </div>
             </Link>
 
@@ -137,19 +137,19 @@ export function EnhancedFooter() {
                 className={`flex items-center space-x-3 text-gray-400 ${isRTL ? "flex-row-reverse space-x-reverse" : ""}`}
               >
                 <Mail className="h-4 w-4 text-blue-400" />
-                <span>{brandConfig.contact.email}</span>
+                <span>info@main.consulting.sa</span>
               </div>
               <div
                 className={`flex items-center space-x-3 text-gray-400 ${isRTL ? "flex-row-reverse space-x-reverse" : ""}`}
               >
                 <Phone className="h-4 w-4 text-blue-400" />
-                <span>{brandConfig.contact.phone}</span>
+                <span>+966 XX XXX XXXX</span>
               </div>
               <div
                 className={`flex items-center space-x-3 text-gray-400 ${isRTL ? "flex-row-reverse space-x-reverse" : ""}`}
               >
                 <MapPin className="h-4 w-4 text-blue-400" />
-                <span>{brandConfig.contact.location}</span>
+                <span>Saudi Arabia</span>
               </div>
             </div>
           </div>
@@ -183,7 +183,7 @@ export function EnhancedFooter() {
             </div>
           </div>
 
-          {/*Newsletter Signup */}
+          {/* Newsletter Signup */}
           <div className="lg:col-span-2">
             <div className="bg-gray-800 dark:bg-gray-900 rounded-2xl p-6 border border-gray-700">
               <div className={`flex items-center space-x-2 mb-4 ${isRTL ? "flex-row-reverse space-x-reverse" : ""}`}>
