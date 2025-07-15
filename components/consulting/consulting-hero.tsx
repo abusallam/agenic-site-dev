@@ -4,10 +4,10 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Award, Users, TrendingUp } from "lucide-react"
-import { useTranslation } from "@/lib/i18n"
+import { useSimpleTranslation } from "@/lib/i18n-simple"
 
 export function ConsultingHero() {
-  const { t } = useTranslation()
+  const { t } = useSimpleTranslation()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {

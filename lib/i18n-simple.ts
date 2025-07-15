@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useContext, useState, useEffect, type ReactNode } from "react"
+import { useState, useEffect } from "react"
 
 export type Locale = "en" | "ar"
 
@@ -80,21 +80,12 @@ const translations = {
   },
 } as const
 
-interface I18nContextType {
-  locale: Locale
-  t: (key: string) => string
-  changeLanguage: (newLocale: Locale) => void
-}
-
-const I18nContext = createContext<I18nContextType | undefined>(undefined)
-
-export function I18nProvider({ children }: { children: ReactNode }) {
+export function useSimpleTranslation() {
   const [locale, setLocale] = useState<Locale>("en")
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
-    // Get locale from localStorage or browser language
     try {
       const savedLocale = localStorage.getItem("locale") as Locale
       const browserLocale = navigator.language.startsWith("ar") ? "ar" : "en"
@@ -140,20 +131,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  return React.createElement(I18nContext.Provider, { value: { locale, t, changeLanguage } }, children)
-}
-
-export function useTranslation() {
-  const context = useContext(I18nContext)
-  if (context === undefined) {
-    // Return a safe fallback instead of throwing
-    return {
-      locale: "en" as Locale,
-      t: (key: string) => key,
-      changeLanguage: () => {},
-    }
-  }
-  return context
+  return { locale, t, changeLanguage }
 }
 
 // For server-side usage

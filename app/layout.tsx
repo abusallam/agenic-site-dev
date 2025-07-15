@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { I18nProvider } from "@/lib/i18n"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { Toaster } from "@/components/ui/toaster"
 
@@ -81,10 +80,8 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <ErrorBoundary>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-            <I18nProvider>
-              {children}
-              <Toaster />
-            </I18nProvider>
+            {children}
+            <Toaster />
           </ThemeProvider>
         </ErrorBoundary>
       </body>

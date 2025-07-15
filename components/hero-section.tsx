@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Bot, Zap, Shield, Play } from "lucide-react"
-import { useTranslation } from "@/lib/i18n"
+import { useSimpleTranslation } from "@/lib/i18n-simple"
 
 export function HeroSection() {
-  const { t, locale } = useTranslation()
+  const { t, locale } = useSimpleTranslation()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
   const [mounted, setMounted] = useState(false)

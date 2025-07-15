@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Menu, Bot, User, Home, MessageSquare, Globe, ChevronDown } from "lucide-react"
-import { useTranslation } from "@/lib/i18n"
+import { useSimpleTranslation } from "@/lib/i18n-simple"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [currentPath, setCurrentPath] = useState("/")
   const [mounted, setMounted] = useState(false)
-  const { t, locale, changeLanguage } = useTranslation()
+  const { t, locale, changeLanguage } = useSimpleTranslation()
 
   useEffect(() => {
     setMounted(true)
