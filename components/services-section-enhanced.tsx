@@ -2,104 +2,102 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Check, Bot, MessageSquare, User } from "lucide-react"
 import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
 
 export function EnhancedServicesSection() {
   const { t, isRTL } = useEnhancedTranslation()
 
-  const services = [
-    {
-      id: "ai-agents",
-      icon: Bot,
-      title: t("hero.features.aiAgents.title"),
-      description: t("hero.features.aiAgents.description"),
-      features: [
-        "Workflow Automation",
-        "Decision Making AI",
-        "System Integration",
-        "Custom Training",
-        "Real-time Analytics",
-      ],
-      cta: "Try AI Agents",
-      link: "/ai-agents",
-    },
-    {
-      id: "chatbots",
-      icon: MessageSquare,
-      title: t("hero.features.chatbots.title"),
-      description: t("hero.features.chatbots.description"),
-      features: [
-        "Natural Language Processing",
-        "Multi-language Support",
-        "Context Awareness",
-        "CRM Integration",
-        "Analytics Dashboard",
-      ],
-      cta: "Try Chatbots",
-      link: "/chatbots",
-    },
-    {
-      id: "consulting",
-      icon: User,
-      title: t("hero.features.consulting.title"),
-      description: t("hero.features.consulting.description"),
-      features: [
-        "AI Strategy Development",
-        "Implementation Planning",
-        "Team Training",
-        "ROI Optimization",
-        "Ongoing Support",
-      ],
-      cta: "Book Consultation",
-      link: "/consulting",
-    },
-  ]
-
   return (
-    <section
-      id="services"
-      className={`w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900 ${isRTL ? "rtl" : ""}`}
-    >
+    <section id="services" className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-950">
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+        <div className={`flex flex-col items-center justify-center space-y-4 text-center ${isRTL ? "rtl" : ""}`}>
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Our AI Solutions</h2>
-            <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Comprehensive AI services tailored to your business needs.
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">{t("services.title")}</h2>
+            <p className="max-w-[900px] text-gray-600 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              {t("services.subtitle")}
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <Card key={service.id} className="flex flex-col h-full">
-              <CardHeader className="flex flex-col items-center text-center pb-4">
-                <div className="p-3 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 mb-4">
-                  <service.icon className="w-8 h-8" />
-                </div>
-                <CardTitle className="text-2xl font-bold">{service.title}</CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-400 mt-2">
-                  {service.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-1 flex flex-col justify-between p-6 pt-0">
-                <ul className="space-y-2 text-gray-700 dark:text-gray-300 mb-6">
-                  {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-green-500" />
-                      <span>{feature}</span>
+        <div className="mx-auto grid max-w-5xl items-start gap-8 py-12 lg:grid-cols-3 lg:gap-12">
+          <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <CardHeader>
+              <Bot className="h-10 w-10 text-blue-600 mb-4" />
+              <CardTitle>{t("services.aiAgents.title")}</CardTitle>
+            </CardHeader>
+            <CardContent className="flex-1">
+              <p className="text-gray-600 dark:text-gray-400 mb-4">{t("services.aiAgents.description")}</p>
+              <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                {t("services.aiAgents.features")
+                  .split(",")
+                  .map((feature, index) => (
+                    <li key={index} className={`flex items-center ${isRTL ? "flex-row-reverse text-right" : ""}`}>
+                      <Check className={`h-4 w-4 text-green-500 ${isRTL ? "ml-2" : "mr-2"}`} />
+                      {feature.trim()}
                     </li>
                   ))}
-                </ul>
-                <div className="text-center">
-                  <Button asChild className="w-full">
-                    <Link href={service.link}>{service.cta}</Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+              </ul>
+            </CardContent>
+            <CardFooter className="flex flex-col items-start gap-4">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">{t("services.aiAgents.pricing")}</div>
+              <Button asChild className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                <Link href="/ai-agents">{t("services.aiAgents.cta")}</Link>
+              </Button>
+            </CardFooter>
+          </Card>
+
+          <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <CardHeader>
+              <MessageSquare className="h-10 w-10 text-purple-600 mb-4" />
+              <CardTitle>{t("services.chatbots.title")}</CardTitle>
+            </CardHeader>
+            <CardContent className="flex-1">
+              <p className="text-gray-600 dark:text-gray-400 mb-4">{t("services.chatbots.description")}</p>
+              <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                {t("services.chatbots.features")
+                  .split(",")
+                  .map((feature, index) => (
+                    <li key={index} className={`flex items-center ${isRTL ? "flex-row-reverse text-right" : ""}`}>
+                      <Check className={`h-4 w-4 text-green-500 ${isRTL ? "ml-2" : "mr-2"}`} />
+                      {feature.trim()}
+                    </li>
+                  ))}
+              </ul>
+            </CardContent>
+            <CardFooter className="flex flex-col items-start gap-4">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">{t("services.chatbots.pricing")}</div>
+              <Button asChild className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+                <Link href="/chatbots">{t("services.chatbots.cta")}</Link>
+              </Button>
+            </CardFooter>
+          </Card>
+
+          <Card className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <CardHeader>
+              <User className="h-10 w-10 text-green-600 mb-4" />
+              <CardTitle>{t("services.consulting.title")}</CardTitle>
+            </CardHeader>
+            <CardContent className="flex-1">
+              <p className="text-gray-600 dark:text-gray-400 mb-4">{t("services.consulting.description")}</p>
+              <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                {t("services.consulting.features")
+                  .split(",")
+                  .map((feature, index) => (
+                    <li key={index} className={`flex items-center ${isRTL ? "flex-row-reverse text-right" : ""}`}>
+                      <Check className={`h-4 w-4 text-green-500 ${isRTL ? "ml-2" : "mr-2"}`} />
+                      {feature.trim()}
+                    </li>
+                  ))}
+              </ul>
+            </CardContent>
+            <CardFooter className="flex flex-col items-start gap-4">
+              <div className="text-2xl font-bold text-gray-900 dark:text-white">{t("services.consulting.pricing")}</div>
+              <Button asChild className="w-full bg-green-600 hover:bg-green-700 text-white">
+                <Link href="/consulting">{t("services.consulting.cta")}</Link>
+              </Button>
+            </CardFooter>
+          </Card>
         </div>
       </div>
     </section>

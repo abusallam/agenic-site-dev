@@ -2,16 +2,15 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Moon, Sun, Menu, Globe } from "lucide-react"
+import { Menu, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
-import Image from "next/image"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export function EnhancedNavigation() {
-  const { theme, setTheme } = useTheme()
   const { t, changeLanguage, locale, isRTL } = useEnhancedTranslation()
+  const { theme, setTheme } = useTheme()
 
   const navLinks = [
     { href: "/", label: t("nav.home") },
@@ -25,17 +24,10 @@ export function EnhancedNavigation() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-2" prefetch={false}>
-          <Image
-            src="/placeholder-logo.svg"
-            alt="main.consulting.sa Logo"
-            width={32}
-            height={32}
-            className="dark:invert"
-          />
-          <span className="text-lg font-bold">main.consulting.sa</span>
+        <Link href="/" className="flex items-center gap-2 font-bold text-lg" prefetch={false}>
+          <span className="text-blue-600 dark:text-blue-400">main.consulting.sa</span>
         </Link>
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -51,19 +43,6 @@ export function EnhancedNavigation() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon">
-                <Globe className="h-[1.2rem] w-[1.2rem]" />
-                <span className="sr-only">Toggle language</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => changeLanguage("en")}>English</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => changeLanguage("ar")}>العربية</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon">
                 <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                 <span className="sr-only">Toggle theme</span>
@@ -76,11 +55,21 @@ export function EnhancedNavigation() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button variant="outline" className="hidden md:inline-flex bg-transparent">
-            {t("nav.signIn")}
-          </Button>
-          <Button className="hidden md:inline-flex">{t("nav.getStarted")}</Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="capitalize bg-transparent">
+                {locale}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => changeLanguage("en")}>English</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => changeLanguage("ar")}>العربية</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
+          <Button asChild>
+            <Link href="/sign-in">{t("nav.signIn")}</Link>
+          </Button>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden bg-transparent">
@@ -89,7 +78,7 @@ export function EnhancedNavigation() {
               </Button>
             </SheetTrigger>
             <SheetContent side={isRTL ? "right" : "left"} className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col gap-4 p-4">
+              <nav className="flex flex-col gap-6 pt-6">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
@@ -100,10 +89,6 @@ export function EnhancedNavigation() {
                     {link.label}
                   </Link>
                 ))}
-                <div className="mt-4 flex flex-col gap-2">
-                  <Button variant="outline">{t("nav.signIn")}</Button>
-                  <Button>{t("nav.getStarted")}</Button>
-                </div>
               </nav>
             </SheetContent>
           </Sheet>
