@@ -10,69 +10,48 @@ export function EnhancedTestimonialsSection() {
 
   const testimonials = [
     {
-      name: "Ahmed Al-Farsi",
-      title: "CEO, Tech Innovations",
+      name: "Jane Doe",
+      title: "CEO, TechCorp",
       quote:
-        "Working with main.consulting.sa transformed our customer support. Their AI chatbots are incredibly effective and have significantly reduced our response times.",
+        "main.consulting.sa transformed our operations with their AI agents. The efficiency gains were incredible!",
       avatar: "/placeholder-user.jpg",
       rating: 5,
     },
     {
-      name: "Fatima Zahra",
-      title: "Operations Director, Global Logistics",
+      name: "John Smith",
+      title: "Head of Customer Service, GlobalConnect",
       quote:
-        "The AI agents implemented by Asim Abu Salam streamlined our supply chain operations, leading to remarkable efficiency gains and cost savings. Highly recommended!",
+        "Our chatbots provide seamless 24/7 support. Customer satisfaction has never been higher thanks to main.consulting.sa.",
       avatar: "/placeholder-user.jpg",
       rating: 5,
     },
     {
-      name: "Khalid bin Saud",
-      title: "Founder, E-commerce Solutions",
+      name: "Sarah Lee",
+      title: "Founder, InnovateX",
       quote:
-        "Asim's consulting expertise was invaluable. He helped us develop a clear AI strategy that perfectly aligns with our business goals. A true visionary.",
+        "The AI consulting from main.consulting.sa was invaluable. They helped us define a clear AI strategy and execute it flawlessly.",
       avatar: "/placeholder-user.jpg",
       rating: 5,
-    },
-    {
-      name: "Noura Al-Mansour",
-      title: "Head of Marketing, Digital Growth",
-      quote:
-        "The insights provided by their AI analytics have been a game-changer for our marketing campaigns. We're seeing much higher engagement and conversion rates.",
-      avatar: "/placeholder-user.jpg",
-      rating: 4,
     },
   ]
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-900">
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-950">
       <div className="container px-4 md:px-6">
-        <div className={`flex flex-col items-center justify-center space-y-4 text-center ${isRTL ? "rtl" : ""}`}>
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">What Our Clients Say</h2>
-            <p className="max-w-[900px] text-gray-600 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Hear from businesses that have achieved remarkable results with our AI solutions and consulting.
-            </p>
-          </div>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-gray-900 dark:text-white">
+            What Our Clients Say
+          </h2>
+          <p className="max-w-[700px] mx-auto text-gray-600 dark:text-gray-400 mt-4">
+            Hear from businesses that have achieved remarkable success with our AI solutions and consulting services.
+          </p>
         </div>
-        <div className="mx-auto grid max-w-5xl items-start gap-8 py-12 lg:grid-cols-2 lg:gap-12">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardContent className="p-6 flex-1">
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
-                  {[...Array(5 - testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-gray-300 dark:text-gray-600" />
-                  ))}
-                </div>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed italic">
-                  &quot;{testimonial.quote}&quot;
-                </p>
-              </CardContent>
-              <div className={`flex items-center p-6 border-t dark:border-gray-800 ${isRTL ? "flex-row-reverse" : ""}`}>
-                <Avatar className={`h-12 w-12 ${isRTL ? "ml-4" : "mr-4"}`}>
-                  <AvatarImage src={testimonial.avatar || "/placeholder.svg"} alt={testimonial.name} />
+            <Card key={index} className="p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="flex flex-col items-center text-center">
+                <Avatar className="h-16 w-16 mb-4">
+                  <AvatarImage src={testimonial.avatar || "/placeholder.svg"} />
                   <AvatarFallback>
                     {testimonial.name
                       .split(" ")
@@ -80,11 +59,15 @@ export function EnhancedTestimonialsSection() {
                       .join("")}
                   </AvatarFallback>
                 </Avatar>
-                <div className={isRTL ? "text-right" : ""}>
-                  <p className="font-semibold text-gray-900 dark:text-white">{testimonial.name}</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{testimonial.title}</p>
+                <p className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{testimonial.name}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{testimonial.title}</p>
+                <div className="flex mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                  ))}
                 </div>
-              </div>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed italic">"{testimonial.quote}"</p>
+              </CardContent>
             </Card>
           ))}
         </div>

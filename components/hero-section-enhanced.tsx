@@ -18,9 +18,10 @@ import {
   User,
 } from "lucide-react"
 import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { cn } from "@/lib/utils"
 
 export function EnhancedHeroSection() {
-  const { t, locale, isRTL } = useEnhancedTranslation()
+  const { t, isRTL } = useEnhancedTranslation()
   const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -106,18 +107,21 @@ export function EnhancedHeroSection() {
       <div className="absolute bottom-20 right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-xl animate-pulse delay-1000" />
 
       <div className="relative container mx-auto px-4">
-        <div className={`text-center max-w-6xl mx-auto ${isRTL ? "rtl" : ""}`}>
+        <div className={cn("text-center max-w-6xl mx-auto", isRTL && "rtl")}>
           {/* Badge */}
-          <div className={`flex justify-center mb-6 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
+          <div className={cn("flex justify-center mb-6", isVisible ? "animate-fade-in" : "opacity-0")}>
             <Badge className="flex items-center space-x-2 bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-200 px-6 py-3 text-sm font-medium shadow-lg hover:shadow-xl transition-shadow duration-300 border-0">
-              <Zap className="h-4 w-4" />
+              <Zap className={cn("h-4 w-4", isRTL ? "ml-2" : "mr-2")} />
               <span>{t("hero.badge")}</span>
             </Badge>
           </div>
 
           {/* Main Title */}
           <h1
-            className={`text-4xl sm:text-6xl lg:text-7xl font-bold font-heading tracking-tight text-gray-900 dark:text-white mb-6 ${isVisible ? "animate-slide-up" : "opacity-0"}`}
+            className={cn(
+              "text-4xl sm:text-6xl lg:text-7xl font-bold font-heading tracking-tight text-gray-900 dark:text-white mb-6",
+              isVisible ? "animate-slide-up" : "opacity-0",
+            )}
           >
             {t("hero.title")}
             <br />
@@ -128,21 +132,31 @@ export function EnhancedHeroSection() {
 
           {/* Subtitle */}
           <p
-            className={`text-lg sm:text-xl text-blue-600 dark:text-blue-400 font-medium mb-4 ${isVisible ? "animate-slide-up" : "opacity-0"}`}
+            className={cn(
+              "text-lg sm:text-xl text-blue-600 dark:text-blue-400 font-medium mb-4",
+              isVisible ? "animate-slide-up" : "opacity-0",
+            )}
           >
             {t("hero.subtitle")}
           </p>
 
           {/* Description */}
           <p
-            className={`text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed ${isVisible ? "animate-slide-up" : "opacity-0"}`}
+            className={cn(
+              "text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed",
+              isVisible ? "animate-slide-up" : "opacity-0",
+            )}
           >
             {t("hero.description")}
           </p>
 
           {/* Trust Indicators */}
           <div
-            className={`flex items-center justify-center space-x-6 mb-8 ${isVisible ? "animate-fade-in" : "opacity-0"} ${isRTL ? "flex-row-reverse space-x-reverse" : ""}`}
+            className={cn(
+              "flex items-center justify-center space-x-6 mb-8",
+              isVisible ? "animate-fade-in" : "opacity-0",
+              isRTL && "flex-row-reverse space-x-reverse",
+            )}
           >
             <div className="flex items-center space-x-1">
               {[...Array(5)].map((_, i) => (
@@ -158,7 +172,11 @@ export function EnhancedHeroSection() {
 
           {/* CTA Buttons */}
           <div
-            className={`flex flex-col sm:flex-row gap-4 justify-center mb-16 ${isVisible ? "animate-slide-up" : "opacity-0"} ${isRTL ? "flex-row-reverse" : ""}`}
+            className={cn(
+              "flex flex-col sm:flex-row gap-4 justify-center mb-16",
+              isVisible ? "animate-slide-up" : "opacity-0",
+              isRTL && "flex-row-reverse",
+            )}
           >
             <Button
               size="lg"
@@ -166,7 +184,10 @@ export function EnhancedHeroSection() {
             >
               {t("hero.primaryCta")}
               <ArrowRight
-                className={`h-5 w-5 group-hover:translate-x-1 transition-transform duration-200 ${isRTL ? "rotate-180 group-hover:-translate-x-1" : "ml-2"}`}
+                className={cn(
+                  "h-5 w-5 group-hover:translate-x-1 transition-transform duration-200",
+                  isRTL ? "rotate-180 group-hover:-translate-x-1" : "ml-2",
+                )}
               />
             </Button>
             <Button
@@ -176,7 +197,10 @@ export function EnhancedHeroSection() {
               onClick={scrollToServices}
             >
               <Play
-                className={`h-5 w-5 group-hover:scale-110 transition-transform duration-200 ${isRTL ? "ml-2" : "mr-2"}`}
+                className={cn(
+                  "h-5 w-5 group-hover:scale-110 transition-transform duration-200",
+                  isRTL ? "ml-2" : "mr-2",
+                )}
               />
               {t("hero.secondaryCta")}
             </Button>
@@ -187,16 +211,22 @@ export function EnhancedHeroSection() {
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className={`overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-105 group border-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm ${
-                  index === currentFeatureIndex ? "ring-2 ring-blue-500 shadow-xl scale-105" : ""
-                } ${isVisible ? "animate-scale-in" : "opacity-0"}`}
+                className={cn(
+                  "overflow-hidden hover:shadow-2xl transition-all duration-500 hover:scale-105 group border-0 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm",
+                  index === currentFeatureIndex ? "ring-2 ring-blue-500 shadow-xl scale-105" : "",
+                  isVisible ? "animate-scale-in" : "opacity-0",
+                )}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <CardContent className="p-6 text-center">
                   <div
-                    className={`h-16 w-16 rounded-2xl ${feature.bgColor} flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300`}
+                    className={cn(
+                      "h-16 w-16 rounded-2xl",
+                      feature.bgColor,
+                      "flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300",
+                    )}
                   >
-                    <feature.icon className={`h-8 w-8 ${feature.color}`} />
+                    <feature.icon className={cn("h-8 w-8", feature.color)} />
                   </div>
                   <h3 className="text-lg font-semibold mb-3 font-heading text-gray-900 dark:text-white">
                     {feature.title}

@@ -1,16 +1,24 @@
 "use client"
 
 import Link from "next/link"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { ModeToggle } from "@/components/theme-provider-enhanced"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { MenuIcon, GlobeIcon } from "lucide-react"
+import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { cn } from "@/lib/utils"
+import { usePathname } from "next/navigation"
 
 export function EnhancedNavigation() {
-  const { t, changeLanguage, locale, isRTL } = useEnhancedTranslation()
-  const { theme, setTheme } = useTheme()
+  const { t, locale, changeLanguage, isRTL } = useEnhancedTranslation()
+  const [mounted, setMounted] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const navLinks = [
     { href: "/", label: t("nav.home") },
@@ -21,75 +29,90 @@ export function EnhancedNavigation() {
     { href: "/contact", label: t("nav.contact") },
   ]
 
+  if (!mounted) {
+    return (
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+          <Link className="flex items-center gap-2" href="/">
+            <span className="text-lg font-bold">main.consulting.sa</span>
+          </Link>
+          <nav className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => (
+              <Link key={link.href} className="text-sm font-medium hover:underline underline-offset-4" href={link.href}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </header>
+    )
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg" prefetch={false}>
-          <span className="text-blue-600 dark:text-blue-400">main.consulting.sa</span>
+        <Link className="flex items-center gap-2" href={`/${locale}/`}>
+          <span className="text-lg font-bold">main.consulting.sa</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className={cn("hidden md:flex items-center gap-6", isRTL && "flex-row-reverse")}>
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
-              className="text-sm font-medium hover:underline underline-offset-4"
-              prefetch={false}
+              className={cn(
+                "text-sm font-medium hover:underline underline-offset-4",
+                pathname === `/${locale}${link.href}` && "text-primary",
+              )}
+              href={`/${locale}${link.href}`}
             >
               {link.label}
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-4">
-          <DropdownMenu>
+        <div className={cn("flex items-center gap-4", isRTL && "flex-row-reverse")}>
+          <DropdownMenu dir={isRTL ? "rtl" : "ltr"}>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                <span className="sr-only">Toggle theme</span>
+              <Button variant="outline" size="icon">
+                {/* Corrected: Wrap children in a span to ensure a single direct child for asChild */}
+                <span className="flex items-center justify-center">
+                  <GlobeIcon className="h-[1.2rem] w-[1.2rem]" />
+                  <span className="sr-only">Toggle language</span>
+                </span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="capitalize bg-transparent">
-                {locale}
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align={isRTL ? "end" : "start"}>
               <DropdownMenuItem onClick={() => changeLanguage("en")}>English</DropdownMenuItem>
               <DropdownMenuItem onClick={() => changeLanguage("ar")}>العربية</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-
+          <ModeToggle />
           <Button asChild>
-            <Link href="/sign-in">{t("nav.signIn")}</Link>
+            <Link href={`/${locale}/contact`}>{t("nav.getStarted")}</Link>
           </Button>
-          <Sheet>
+          <Sheet dir={isRTL ? "rtl" : "ltr"}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="md:hidden bg-transparent">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle navigation menu</span>
+              <Button className="md:hidden bg-transparent" size="icon" variant="outline">
+                {/* Wrap children in a span to ensure a single direct child for asChild */}
+                <span className="flex items-center justify-center">
+                  <MenuIcon className="h-6 w-6" />
+                  <span className="sr-only">Toggle navigation menu</span>
+                </span>
               </Button>
             </SheetTrigger>
-            <SheetContent side={isRTL ? "right" : "left"} className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col gap-6 pt-6">
+            <SheetContent side={isRTL ? "right" : "left"}>
+              <div className="grid gap-2 py-6">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
-                    href={link.href}
-                    className="text-lg font-medium hover:underline underline-offset-4"
-                    prefetch={false}
+                    className={cn(
+                      "flex w-full items-center py-2 text-lg font-semibold",
+                      pathname === `/${locale}${link.href}` && "text-primary",
+                    )}
+                    href={`/${locale}${link.href}`}
                   >
                     {link.label}
                   </Link>
                 ))}
-              </nav>
+              </div>
             </SheetContent>
           </Sheet>
         </div>

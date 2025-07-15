@@ -2,66 +2,83 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { CheckCircle, Briefcase, TrendingUp, Users } from "lucide-react"
+import { Users, Briefcase, Award, DollarSign } from "lucide-react"
 import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { cn } from "@/lib/utils"
 
 export function EnhancedConsultingHero() {
   const { t, isRTL } = useEnhancedTranslation()
 
+  const expertiseAreas = [
+    "AI Strategy Development",
+    "Machine Learning Implementation",
+    "Digital Transformation",
+    "Process Automation",
+    "Team Training & Development",
+  ]
+
+  const stats = [
+    { number: "10+", label: "Years Experience", icon: Award },
+    { number: "200+", label: "Successful Projects", icon: Briefcase },
+    { number: "300%", label: "Average ROI Increase", icon: DollarSign },
+    { number: "50+", label: "Enterprise Clients", icon: Users },
+  ]
+
+  const services = [
+    {
+      title: "AI Strategy Development",
+      description: "Comprehensive AI roadmap aligned with your business objectives and market opportunities.",
+      duration: "2-4 weeks",
+      deliverables: [
+        "Current state assessment",
+        "AI opportunity identification",
+        "Implementation roadmap",
+        "ROI projections",
+        "Risk assessment",
+      ],
+    },
+    {
+      title: "Implementation Consulting",
+      description: "Hands-on guidance for successful AI project execution and deployment.",
+      duration: "3-6 months",
+      deliverables: [
+        "Technical architecture design",
+        "Team training and development",
+        "Vendor selection guidance",
+        "Project management support",
+        "Quality assurance",
+      ],
+    },
+    {
+      title: "Digital Transformation",
+      description: "Complete organizational transformation with AI at the core of your business strategy.",
+      duration: "6-12 months",
+      deliverables: [
+        "Organization-wide AI strategy",
+        "Change management support",
+        "Multi-phase implementation",
+        "Performance monitoring",
+        "Continuous optimization",
+      ],
+    },
+  ]
+
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-br from-green-50 via-white to-teal-50 dark:from-gray-950 dark:via-gray-900 dark:to-green-950">
-      <div className="container px-4 md:px-6">
-        <div className={`grid gap-10 lg:grid-cols-2 lg:gap-16 items-center ${isRTL ? "lg:grid-flow-col-dense" : ""}`}>
-          <div className={`space-y-6 ${isRTL ? "text-right" : ""}`}>
-            <Badge className="bg-green-100 dark:bg-green-950 text-green-800 dark:text-green-200 px-4 py-2 text-sm font-medium">
-              {t("consulting.badge")}
-            </Badge>
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-gray-900 dark:text-white">
-              {t("consulting.title")}
-            </h1>
-            <p className="max-w-[700px] text-gray-600 dark:text-gray-300 md:text-xl">{t("consulting.description")}</p>
-            <div className={`flex flex-wrap gap-4 ${isRTL ? "justify-end" : ""}`}>
-              <Button asChild className="bg-green-600 hover:bg-green-700 text-white">
-                <Link href="/contact">{t("consulting.cta.primary")}</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href="/consulting/case-studies">{t("consulting.cta.secondary")}</Link>
-              </Button>
-            </div>
-            <div
-              className={`grid grid-cols-2 gap-4 pt-6 border-t border-gray-200 dark:border-gray-700 mt-8 ${isRTL ? "text-right" : ""}`}
-            >
-              <div className="flex items-center gap-2">
-                <Briefcase className="h-5 w-5 text-green-600" />
-                <span className="text-gray-600 dark:text-gray-400">{t("consulting.stats.experience")}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-5 w-5 text-green-600" />
-                <span className="text-gray-600 dark:text-gray-400">{t("consulting.stats.projects")}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-green-600" />
-                <span className="text-gray-600 dark:text-gray-400">{t("consulting.stats.roi")}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-green-600" />
-                <span className="text-gray-600 dark:text-gray-400">{t("consulting.stats.clients")}</span>
-              </div>
-            </div>
-          </div>
-          <div className={`flex justify-center ${isRTL ? "lg:order-first" : ""}`}>
-            <Avatar className="h-64 w-64 md:h-80 md:w-80 lg:h-96 lg:w-96 border-4 border-green-500 shadow-xl">
-              <AvatarImage src="/placeholder-user.jpg" alt={t("consulting.name")} />
-              <AvatarFallback>
-                {t("consulting.name")
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              </AvatarFallback>
-            </Avatar>
-          </div>
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-green-600 to-teal-600 text-white">
+      <div className="container px-4 md:px-6 text-center">
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
+          {t("services.consulting.title")}
+        </h2>
+        <p className="mx-auto max-w-[700px] text-gray-200 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed mt-4">
+          {t("services.consulting.description")}
+        </p>
+        <div
+          className={cn("flex flex-col gap-2 min-[400px]:flex-row justify-center mt-8", isRTL && "flex-row-reverse")}
+        >
+          <Button className="bg-white text-green-600 hover:bg-gray-100">{t("services.consulting.cta")}</Button>
+          <Button variant="outline" className="text-white border-white hover:bg-white/20 bg-transparent">
+            <Link href={`/${t("ui.learnMore")}`}>{t("ui.learnMore")}</Link>
+          </Button>
         </div>
       </div>
     </section>

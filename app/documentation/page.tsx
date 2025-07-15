@@ -1,93 +1,193 @@
+import type { Metadata } from "next"
+import { EnhancedNavigation } from "@/components/navigation-enhanced"
+import { EnhancedFooter } from "@/components/footer-enhanced"
+import { translations } from "@/lib/i18n-enhanced"
+import { cn } from "@/lib/utils"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardTitle } from "@/components/ui/card"
-import { Book, FileText, Code, Search, HelpCircle } from "lucide-react"
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Book, Code, LifeBuoy } from "lucide-react"
+
+// Function to generate metadata for each locale
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  const locale = params.locale || "en"
+  const t = (key: string) => {
+    const keys = key.split(".")
+    let current: any = translations[locale] || translations.en
+    for (const k of keys) {
+      if (current && typeof current === "object" && k in current) {
+        current = current[k]
+      } else {
+        return `Missing translation for ${key}`
+      }
+    }
+    return typeof current === "string" ? current : `Missing translation for ${key}`
+  }
+
+  return {
+    title: t("documentationPage.title"),
+    description: t("documentationPage.description"),
+  }
+}
 
 export default function DocumentationPage() {
-  const { t, isRTL } = useEnhancedTranslation()
+  // This component is a Server Component, so useEnhancedTranslation cannot be called directly here.
+  // We pass the locale from params to client components if needed, or fetch translations directly for static content.
+  // For dynamic content that needs client-side translation, use useEnhancedTranslation in a client component.
+
+  // Since this is a server component, we can directly access translations for static content.
+  const currentLocale = "en" // This will be replaced by the actual locale from params in a real setup
+  const t = (key: string) => {
+    const keys = key.split(".")
+    let current: any = translations[currentLocale] || translations.en
+    for (const k of keys) {
+      if (current && typeof current === "object" && k in current) {
+        current = current[k]
+      } else {
+        return `Missing translation for ${key}`
+      }
+    }
+    return typeof current === "string" ? current : `Missing translation for ${key}`
+  }
+
+  const isRTL = currentLocale === "ar" // Assuming 'ar' is the only RTL locale
 
   return (
-    <div className={`flex flex-col min-h-[100dvh] ${isRTL ? "rtl" : ""}`}>
+    <div className="flex flex-col min-h-[100dvh]">
+      <EnhancedNavigation />
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-teal-600 to-cyan-600 text-white">
-          <div className="container px-4 md:px-6 text-center">
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
-              {t("nav.documentation")}
-            </h1>
-            <p className="mx-auto max-w-[700px] text-gray-200 md:text-xl mt-4">
-              Find comprehensive guides, API references, and tutorials to get started with our AI solutions.
-            </p>
-            <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center mt-8">
-              <Button className="bg-white text-teal-600 hover:bg-gray-100">{t("ui.getStarted")}</Button>
-              <Button variant="outline" className="text-white border-white hover:bg-white/20 bg-transparent">
-                {t("ui.contactUs")}
+        {/* Hero Section */}
+        <section
+          className={cn(
+            "w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-green-500 to-green-700 text-white",
+            isRTL && "text-right",
+          )}
+        >
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+                  {t("documentationPage.hero.title")}
+                </h1>
+                <p className="max-w-[900px] text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  {t("documentationPage.hero.subtitle")}
+                </p>
+              </div>
+              <Button asChild className="bg-white text-green-600 hover:bg-green-100">
+                <Link href={`/${currentLocale}/documentation`}>{t("documentationPage.hero.cta")}</Link>
               </Button>
             </div>
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-950">
+        {/* Sections */}
+        <section className={cn("w-full py-12 md:py-24 lg:py-32", isRTL && "text-right")}>
           <div className="container px-4 md:px-6">
-            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-              <Card className="flex flex-col items-center text-center p-6 shadow-lg hover:shadow-xl transition-shadow">
-                <Book className="h-12 w-12 text-teal-600 mb-4" />
-                <CardTitle className="text-xl font-bold mb-2">Getting Started Guides</CardTitle>
-                <CardContent className="text-gray-600 dark:text-gray-400">
-                  Step-by-step instructions to set up and configure your AI agents and chatbots.
-                </CardContent>
-              </Card>
-              <Card className="flex flex-col items-center text-center p-6 shadow-lg hover:shadow-xl transition-shadow">
-                <FileText className="h-12 w-12 text-cyan-600 mb-4" />
-                <CardTitle className="text-xl font-bold mb-2">API Reference</CardTitle>
-                <CardContent className="text-gray-600 dark:text-gray-400">
-                  Detailed documentation for our API endpoints, data models, and authentication.
-                </CardContent>
-              </Card>
-              <Card className="flex flex-col items-center text-center p-6 shadow-lg hover:shadow-xl transition-shadow">
-                <Code className="h-12 w-12 text-blue-600 mb-4" />
-                <CardTitle className="text-xl font-bold mb-2">Code Examples</CardTitle>
-                <CardContent className="text-gray-600 dark:text-gray-400">
-                  Practical code snippets and examples to help you integrate our solutions into your applications.
-                </CardContent>
-              </Card>
-              <Card className="flex flex-col items-center text-center p-6 shadow-lg hover:shadow-xl transition-shadow">
-                <Search className="h-12 w-12 text-purple-600 mb-4" />
-                <CardTitle className="text-xl font-bold mb-2">Searchable Knowledge Base</CardTitle>
-                <CardContent className="text-gray-600 dark:text-gray-400">
-                  Quickly find answers to common questions and troubleshooting tips.
-                </CardContent>
-              </Card>
-              <Card className="flex flex-col items-center text-center p-6 shadow-lg hover:shadow-xl transition-shadow">
-                <HelpCircle className="h-12 w-12 text-orange-600 mb-4" />
-                <CardTitle className="text-xl font-bold mb-2">FAQs and Troubleshooting</CardTitle>
-                <CardContent className="text-gray-600 dark:text-gray-400">
-                  Answers to frequently asked questions and solutions for common issues.
-                </CardContent>
-              </Card>
-              <Card className="flex flex-col items-center text-center p-6 shadow-lg hover:shadow-xl transition-shadow">
-                <FileText className="h-12 w-12 text-red-600 mb-4" />
-                <CardTitle className="text-xl font-bold mb-2">Release Notes</CardTitle>
-                <CardContent className="text-gray-600 dark:text-gray-400">
-                  Stay up-to-date with the latest features, improvements, and bug fixes.
-                </CardContent>
-              </Card>
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  {t("documentationPage.sections.title")}
+                </h2>
+                <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+                  {t("documentationPage.description")}
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-900">
-          <div className="container px-4 md:px-6 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Need More Help?</h2>
-            <p className="mx-auto max-w-[700px] text-gray-600 dark:text-gray-400 md:text-xl mt-4">
-              Our support team is ready to assist you with any questions or issues.
-            </p>
-            <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center mt-8">
-              <Button className="bg-teal-600 text-white hover:bg-teal-700">{t("nav.contact")}</Button>
-              <Button variant="outline">{t("ui.bookDemo")}</Button>
+            <div className="mx-auto grid max-w-5xl items-start gap-8 py-12 sm:grid-cols-1 md:grid-cols-3">
+              <Card>
+                <CardHeader className="flex flex-row items-center space-x-4">
+                  <Book className="h-8 w-8 text-green-500" />
+                  <CardTitle>{t("documentationPage.sections.gettingStarted.title")}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>{t("documentationPage.sections.gettingStarted.description")}</CardDescription>
+                  <ul className="mt-4 space-y-2">
+                    <li>
+                      <Link
+                        className="text-green-600 hover:underline"
+                        href={`/${currentLocale}/documentation/installation`}
+                      >
+                        {t("documentationPage.sections.gettingStarted.link1")}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="text-green-600 hover:underline"
+                        href={`/${currentLocale}/documentation/quick-start`}
+                      >
+                        {t("documentationPage.sections.gettingStarted.link2")}
+                      </Link>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center space-x-4">
+                  <Code className="h-8 w-8 text-green-500" />
+                  <CardTitle>{t("documentationPage.sections.apiReference.title")}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>{t("documentationPage.sections.apiReference.description")}</CardDescription>
+                  <ul className="mt-4 space-y-2">
+                    <li>
+                      <Link
+                        className="text-green-600 hover:underline"
+                        href={`/${currentLocale}/documentation/api/authentication`}
+                      >
+                        {t("documentationPage.sections.apiReference.link1")}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="text-green-600 hover:underline"
+                        href={`/${currentLocale}/documentation/api/agent`}
+                      >
+                        {t("documentationPage.sections.apiReference.link2")}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="text-green-600 hover:underline"
+                        href={`/${currentLocale}/documentation/api/chatbot`}
+                      >
+                        {t("documentationPage.sections.apiReference.link3")}
+                      </Link>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center space-x-4">
+                  <LifeBuoy className="h-8 w-8 text-green-500" />
+                  <CardTitle>{t("documentationPage.sections.troubleshooting.title")}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>{t("documentationPage.sections.troubleshooting.description")}</CardDescription>
+                  <ul className="mt-4 space-y-2">
+                    <li>
+                      <Link
+                        className="text-green-600 hover:underline"
+                        href={`/${currentLocale}/documentation/troubleshooting/common-errors`}
+                      >
+                        {t("documentationPage.sections.troubleshooting.link1")}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="text-green-600 hover:underline"
+                        href={`/${currentLocale}/documentation/troubleshooting/debugging-tips`}
+                      >
+                        {t("documentationPage.sections.troubleshooting.link2")}
+                      </Link>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
       </main>
+      <EnhancedFooter />
     </div>
   )
 }
