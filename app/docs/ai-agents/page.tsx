@@ -1,40 +1,23 @@
-"use client"
-import { EnhancedNavigation } from "@/components/navigation-enhanced"
-import { EnhancedFooter } from "@/components/footer-enhanced"
+import type { Metadata } from "next"
+import AiAgentsClientPage from "./AIAgentsClientPage"
+import { translations } from "@/lib/i18n-enhanced.tsx"
+
+// Function to generate metadata for each locale
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+  const locale = params.lang || "en"
+  const t = (key: string) => {
+    const translationsForLocale = translations[locale as keyof typeof translations];
+    if (!translationsForLocale) {
+      // Fallback to English if the locale doesn't exist
+      return translations.en[key as keyof typeof translations.en] || key;
+    }
+    return translationsForLocale[key as keyof typeof translationsForLocale] || key;
+  };
+  return {
+    title: t("services.aiAgents.title"),
+  };
+}
 
 export default function AiAgentsPage() {
-  return (
-    <div className="flex flex-col min-h-screen">
-      <EnhancedNavigation />
-      <main className="flex-1">
-        <div className="container mx-auto px-4 py-16">
-          <h1 className="text-4xl font-bold mb-8">AI Agents</h1>
-          <div className="prose dark:prose-invert max-w-none">
-            <p>
-              The POTS Portal allows you to create and manage AI agents to automate your workflows. AI agents are
-              intelligent bots that can perform a variety of tasks, such as collecting data, sending emails, and
-              interacting with other applications.
-            </p>
-            <h2 id="creating-an-agent">Creating an Agent</h2>
-            <p>
-              To create an AI agent, navigate to the "AI Agents" page and click the "Create Agent" button. You will be
-              prompted to give your agent a name and a description.
-            </p>
-            <h2 id="configuring-an-agent">Configuring an Agent</h2>
-            <p>
-              Once you have created an agent, you can configure it to perform a variety of tasks. You can add actions
-              to your agent, such as sending an email, calling an API, or running a script. You can also set up
-              triggers to run your agent at a specific time or when a certain event occurs.
-            </p>
-            <h2 id="monitoring-an-agent">Monitoring an Agent</h2>
-            <p>
-              You can monitor the activity of your AI agents from the "AI Agents" page. You can see when your agents
-              have run, what actions they have performed, and whether they have encountered any errors.
-            </p>
-          </div>
-        </div>
-      </main>
-      <EnhancedFooter />
-    </div>
-  )
+  return <AiAgentsClientPage />
 }

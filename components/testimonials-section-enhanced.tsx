@@ -1,5 +1,5 @@
 "use client"
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { useEnhancedTranslation } from "@/lib/i18n-enhanced.tsx"
 import Image from "next/image"
 import { Star } from "lucide-react"
 

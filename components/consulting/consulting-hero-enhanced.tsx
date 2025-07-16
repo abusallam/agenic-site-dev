@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Users, Briefcase, Award, DollarSign } from "lucide-react"
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { useEnhancedTranslation } from "@/lib/i18n-enhanced.tsx"
 import { cn } from "@/lib/utils"
 
 export function EnhancedConsultingHero() {

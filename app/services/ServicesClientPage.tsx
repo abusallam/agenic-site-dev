@@ -2,7 +2,7 @@
 
 import { EnhancedNavigation } from "@/components/navigation-enhanced"
 import { EnhancedFooter } from "@/components/footer-enhanced"
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { useEnhancedTranslation } from "@/lib/i18n-enhanced.tsx"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"

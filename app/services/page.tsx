@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { translations } from "@/lib/i18n-enhanced"
+import { translations } from "@/lib/i18n-enhanced.tsx"
 import ServicesClientPage from "./ServicesClientPage"
 
 // Function to generate metadata for each locale

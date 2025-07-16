@@ -1,7 +1,7 @@
 "use client"
 import { EnhancedNavigation } from "@/components/navigation-enhanced"
 import { EnhancedFooter } from "@/components/footer-enhanced"
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { useEnhancedTranslation } from "@/lib/i18n-enhanced.tsx"
 import Image from "next/image"
 import { Users, Target, Rocket } from "lucide-react"
 
