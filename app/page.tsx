@@ -1,25 +1,17 @@
+import { EnhancedNavigation } from "@/components/navigation-enhanced"
 import { EnhancedHeroSection } from "@/components/hero-section-enhanced"
 import { EnhancedServicesSection } from "@/components/services-section-enhanced"
-import { EnhancedConsultingHero } from "@/components/consulting/consulting-hero-enhanced"
-import { EnhancedTestimonialsSection } from "@/components/testimonials-section-enhanced"
-import { EnhancedContactSection } from "@/components/contact-section-enhanced"
-
-export const metadata = {
-  title: "Home - AI Solutions & Expert Consulting",
-  description:
-    "Transform your business with professional AI consulting services and cutting-edge SaaS solutions for AI agents and chatbots.",
-}
+import { EnhancedFooter } from "@/components/footer-enhanced"
 
 export default function HomePage() {
   return (
-    <>
-      <EnhancedHeroSection />
-      <div id="services">
+    <div className="flex flex-col min-h-screen">
+      <EnhancedNavigation />
+      <main className="flex-1">
+        <EnhancedHeroSection />
         <EnhancedServicesSection />
-      </div>
-      <EnhancedConsultingHero />
-      <EnhancedTestimonialsSection />
-      <EnhancedContactSection />
-    </>
+      </main>
+      <EnhancedFooter />
+    </div>
   )
 }

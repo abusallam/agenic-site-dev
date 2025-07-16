@@ -1,120 +1,134 @@
 "use client"
 
+import * as React from "react"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { ModeToggle } from "@/components/theme-provider-enhanced"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { MenuIcon, GlobeIcon } from "lucide-react"
 import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { brandConfig } from "@/lib/brand"
+import { ThemeToggle } from "./theme-provider-enhanced"
+import { Menu, Globe, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { usePathname } from "next/navigation"
 
 export function EnhancedNavigation() {
-  const { t, locale, changeLanguage, isRTL } = useEnhancedTranslation()
-  const [mounted, setMounted] = useState(false)
-  const pathname = usePathname()
+  const { t, locale, setLocale, isRTL } = useEnhancedTranslation()
+  const [isScrolled, setIsScrolled] = React.useState(false)
 
-  useEffect(() => {
-    setMounted(true)
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const navLinks = [
+  const navItems = [
     { href: "/", label: t("nav.home") },
-    { href: "/ai-agents", label: t("nav.aiAgents") },
-    { href: "/chatbots", label: t("nav.chatbots") },
+    { href: "/services", label: t("nav.services") },
     { href: "/consulting", label: t("nav.consulting") },
     { href: "/documentation", label: t("nav.documentation") },
     { href: "/contact", label: t("nav.contact") },
   ]
 
-  if (!mounted) {
-    return (
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-          <Link className="flex items-center gap-2" href="/">
-            <span className="text-lg font-bold">main.consulting.sa</span>
+  return (
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-300",
+        isScrolled ? "bg-background/80 backdrop-blur-md border-b shadow-sm" : "bg-transparent",
+      )}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <Image
+              src={brandConfig.logo.image || "/placeholder.svg"}
+              alt={brandConfig.name}
+              width={brandConfig.logo.width}
+              height={brandConfig.logo.height}
+              className="transition-transform duration-300 group-hover:scale-110"
+            />
+            <span className="text-xl font-bold font-heading bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              {brandConfig.name}
+            </span>
           </Link>
+
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link key={link.href} className="text-sm font-medium hover:underline underline-offset-4" href={link.href}>
-                {link.label}
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
+              >
+                {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
           </nav>
-        </div>
-      </header>
-    )
-  }
 
-  return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <Link className="flex items-center gap-2" href={`/${locale}/`}>
-          <span className="text-lg font-bold">main.consulting.sa</span>
-        </Link>
-        <nav className={cn("hidden md:flex items-center gap-6", isRTL && "flex-row-reverse")}>
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              className={cn(
-                "text-sm font-medium hover:underline underline-offset-4",
-                pathname === `/${locale}${link.href}` && "text-primary",
-              )}
-              href={`/${locale}${link.href}`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-        <div className={cn("flex items-center gap-4", isRTL && "flex-row-reverse")}>
-          <DropdownMenu dir={isRTL ? "rtl" : "ltr"}>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon">
-                {/* Corrected: Wrap children in a span to ensure a single direct child for asChild */}
-                <span className="flex items-center justify-center">
-                  <GlobeIcon className="h-[1.2rem] w-[1.2rem]" />
-                  <span className="sr-only">Toggle language</span>
-                </span>
+          {/* Actions */}
+          <div className="flex items-center gap-2">
+            {/* Language Switcher */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="gap-2">
+                  <Globe className="h-4 w-4" />
+                  <span className="hidden sm:inline">{locale.toUpperCase()}</span>
+                  <ChevronDown className="h-3 w-3" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align={isRTL ? "start" : "end"}>
+                <DropdownMenuItem onClick={() => setLocale("en")}>English</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLocale("ar")}>العربية</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
+            {/* Auth Buttons */}
+            <div className="hidden md:flex items-center gap-2">
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/auth/login">{t("nav.login")}</Link>
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align={isRTL ? "end" : "start"}>
-              <DropdownMenuItem onClick={() => changeLanguage("en")}>English</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => changeLanguage("ar")}>العربية</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <ModeToggle />
-          <Button asChild>
-            <Link href={`/${locale}/contact`}>{t("nav.getStarted")}</Link>
-          </Button>
-          <Sheet dir={isRTL ? "rtl" : "ltr"}>
-            <SheetTrigger asChild>
-              <Button className="md:hidden bg-transparent" size="icon" variant="outline">
-                {/* Wrap children in a span to ensure a single direct child for asChild */}
-                <span className="flex items-center justify-center">
-                  <MenuIcon className="h-6 w-6" />
-                  <span className="sr-only">Toggle navigation menu</span>
-                </span>
+              <Button size="sm" asChild>
+                <Link href="/auth/signup">{t("nav.signup")}</Link>
               </Button>
-            </SheetTrigger>
-            <SheetContent side={isRTL ? "right" : "left"}>
-              <div className="grid gap-2 py-6">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    className={cn(
-                      "flex w-full items-center py-2 text-lg font-semibold",
-                      pathname === `/${locale}${link.href}` && "text-primary",
-                    )}
-                    href={`/${locale}${link.href}`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
+            </div>
+
+            {/* Mobile Menu */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side={isRTL ? "left" : "right"} className="w-80">
+                <div className="flex flex-col gap-4 mt-8">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="text-lg font-medium hover:text-primary transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                  <div className="flex flex-col gap-2 mt-4">
+                    <Button variant="outline" asChild>
+                      <Link href="/auth/login">{t("nav.login")}</Link>
+                    </Button>
+                    <Button asChild>
+                      <Link href="/auth/signup">{t("nav.signup")}</Link>
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>

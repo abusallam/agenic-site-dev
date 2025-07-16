@@ -1,10 +1,10 @@
 "use client"
-
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bot, MessageSquare, User } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { Bot, MessageSquare, Brain, ArrowRight, Check } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function EnhancedServicesSection() {
@@ -12,64 +12,109 @@ export function EnhancedServicesSection() {
 
   const services = [
     {
+      icon: Bot,
       title: t("services.aiAgents.title"),
       description: t("services.aiAgents.description"),
-      icon: Bot,
       href: "/ai-agents",
-      color: "text-blue-600",
-      bgColor: "bg-blue-50 dark:bg-blue-950/20",
+      features: [
+        "Intelligent Process Automation",
+        "Custom AI Workflows",
+        "24/7 Autonomous Operations",
+        "Advanced Analytics",
+      ],
+      badge: "Popular",
     },
     {
+      icon: MessageSquare,
       title: t("services.chatbots.title"),
       description: t("services.chatbots.description"),
-      icon: MessageSquare,
       href: "/chatbots",
-      color: "text-purple-600",
-      bgColor: "bg-purple-50 dark:bg-purple-950/20",
+      features: ["Natural Language Processing", "Multi-language Support", "Integration Ready", "Real-time Learning"],
+      badge: "New",
     },
     {
+      icon: Brain,
       title: t("services.consulting.title"),
       description: t("services.consulting.description"),
-      icon: User,
       href: "/consulting",
-      color: "text-green-600",
-      bgColor: "bg-green-50 dark:bg-green-950/20",
+      features: ["Strategic AI Planning", "Implementation Guidance", "Team Training", "Ongoing Support"],
+      badge: "Premium",
     },
   ]
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-900">
-      <div className="container px-4 md:px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-gray-900 dark:text-white">
-            Our Core Services
-          </h2>
-          <p className="max-w-[700px] mx-auto text-gray-600 dark:text-gray-400 mt-4">
-            We offer a range of AI-powered solutions and expert consulting to help your business thrive.
-          </p>
-        </div>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <Card
-              key={index}
-              className="flex flex-col items-center text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className={cn("h-16 w-16 rounded-full flex items-center justify-center mb-4", service.bgColor)}>
-                <service.icon className={cn("h-8 w-8", service.color)} />
-              </div>
-              <CardHeader>
-                <CardTitle className="text-xl font-bold mb-2">{service.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-600 dark:text-gray-400 mb-4">
-                  {service.description}
-                </CardDescription>
-                <Button asChild variant="outline">
-                  <Link href={service.href}>{service.cta}</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+    <section className="py-20 bg-muted/30">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-3xl sm:text-4xl font-bold font-heading">{t("services.title")}</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{t("services.subtitle")}</p>
+          </div>
+
+          {/* Services Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <Card
+                key={index}
+                className="group hover-lift glass-effect border-0 bg-background/50 relative overflow-hidden"
+              >
+                {/* Badge */}
+                {service.badge && (
+                  <Badge
+                    className={cn("absolute top-4 z-10", isRTL ? "left-4" : "right-4")}
+                    variant={
+                      service.badge === "Popular" ? "default" : service.badge === "New" ? "secondary" : "outline"
+                    }
+                  >
+                    {service.badge}
+                  </Badge>
+                )}
+
+                <CardHeader className="pb-4">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <service.icon className="h-6 w-6 text-primary" />
+                    </div>
+                  </div>
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors">{service.title}</CardTitle>
+                  <CardDescription className="text-base">{service.description}</CardDescription>
+                </CardHeader>
+
+                <CardContent className="space-y-4">
+                  {/* Features List */}
+                  <ul className="space-y-2">
+                    {service.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center gap-2 text-sm">
+                        <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA Button */}
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors bg-transparent"
+                  >
+                    <Link href={service.href} className="flex items-center justify-center gap-2">
+                      Learn More
+                      <ArrowRight
+                        className={cn(
+                          "h-4 w-4 transition-transform group-hover:translate-x-1",
+                          isRTL && "group-hover:-translate-x-1",
+                        )}
+                      />
+                    </Link>
+                  </Button>
+                </CardContent>
+
+                {/* Hover Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </section>

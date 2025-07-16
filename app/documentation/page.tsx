@@ -1,192 +1,365 @@
-import type { Metadata } from "next"
-import { EnhancedNavigation } from "@/components/navigation-enhanced"
-import { EnhancedFooter } from "@/components/footer-enhanced"
-import { translations } from "@/lib/i18n-enhanced"
-import { cn } from "@/lib/utils"
+"use client"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Book, Code, LifeBuoy } from "lucide-react"
-
-// Function to generate metadata for each locale
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const locale = params.locale || "en"
-  const t = (key: string) => {
-    const keys = key.split(".")
-    let current: any = translations[locale] || translations.en
-    for (const k of keys) {
-      if (current && typeof current === "object" && k in current) {
-        current = current[k]
-      } else {
-        return `Missing translation for ${key}`
-      }
-    }
-    return typeof current === "string" ? current : `Missing translation for ${key}`
-  }
-
-  return {
-    title: t("documentationPage.title"),
-    description: t("documentationPage.description"),
-  }
-}
+import { Badge } from "@/components/ui/badge"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { EnhancedNavigation } from "@/components/navigation-enhanced"
+import { EnhancedFooter } from "@/components/footer-enhanced"
+import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import {
+  Book,
+  Code,
+  Rocket,
+  Settings,
+  Users,
+  Zap,
+  ArrowRight,
+  ExternalLink,
+  FileText,
+  Video,
+  MessageSquare,
+} from "lucide-react"
+import { cn } from "@/lib/utils"
 
 export default function DocumentationPage() {
-  // This component is a Server Component, so useEnhancedTranslation cannot be called directly here.
-  // We pass the locale from params to client components if needed, or fetch translations directly for static content.
-  // For dynamic content that needs client-side translation, use useEnhancedTranslation in a client component.
+  const { t, isRTL } = useEnhancedTranslation()
 
-  // Since this is a server component, we can directly access translations for static content.
-  const currentLocale = "en" // This will be replaced by the actual locale from params in a real setup
-  const t = (key: string) => {
-    const keys = key.split(".")
-    let current: any = translations[currentLocale] || translations.en
-    for (const k of keys) {
-      if (current && typeof current === "object" && k in current) {
-        current = current[k]
-      } else {
-        return `Missing translation for ${key}`
-      }
+  const quickActions = [
+    {
+      icon: Rocket,
+      title: "Quick Start Guide",
+      description: "Get up and running in minutes",
+      href: "/docs/quick-start",
+      badge: "Popular",
+    },
+    {
+      icon: Code,
+      title: "API Reference",
+      description: "Complete API documentation",
+      href: "/docs/api",
+      badge: "Technical",
+    },
+    {
+      icon: Settings,
+      title: "Configuration",
+      description: "Setup and configuration options",
+      href: "/docs/config",
+      badge: "Setup",
+    },
+    {
+      icon: Users,
+      title: "Team Collaboration",
+      description: "Working with teams and permissions",
+      href: "/docs/teams",
+      badge: "New",
+    },
+  ]
+
+  const documentationSections = [
+    {
+      category: "Getting Started",
+      items: [
+        { title: "Introduction", href: "/docs/intro", type: "guide" },
+        { title: "Installation", href: "/docs/installation", type: "guide" },
+        { title: "First Steps", href: "/docs/first-steps", type: "guide" },
+        { title: "Basic Configuration", href: "/docs/basic-config", type: "guide" },
+      ],
+    },
+    {
+      category: "AI Agents",
+      items: [
+        { title: "Creating AI Agents", href: "/docs/ai-agents/create", type: "tutorial" },
+        { title: "Agent Configuration", href: "/docs/ai-agents/config", type: "reference" },
+        { title: "Training & Fine-tuning", href: "/docs/ai-agents/training", type: "tutorial" },
+        { title: "Deployment", href: "/docs/ai-agents/deploy", type: "guide" },
+      ],
+    },
+    {
+      category: "Chatbots",
+      items: [
+        { title: "Building Chatbots", href: "/docs/chatbots/build", type: "tutorial" },
+        { title: "Natural Language Processing", href: "/docs/chatbots/nlp", type: "reference" },
+        { title: "Integration Guide", href: "/docs/chatbots/integration", type: "guide" },
+        { title: "Analytics & Monitoring", href: "/docs/chatbots/analytics", type: "guide" },
+      ],
+    },
+    {
+      category: "API & Integration",
+      items: [
+        { title: "REST API", href: "/docs/api/rest", type: "reference" },
+        { title: "GraphQL API", href: "/docs/api/graphql", type: "reference" },
+        { title: "Webhooks", href: "/docs/api/webhooks", type: "reference" },
+        { title: "SDKs & Libraries", href: "/docs/api/sdks", type: "reference" },
+      ],
+    },
+    {
+      category: "Advanced Topics",
+      items: [
+        { title: "Custom Models", href: "/docs/advanced/models", type: "tutorial" },
+        { title: "Performance Optimization", href: "/docs/advanced/performance", type: "guide" },
+        { title: "Security Best Practices", href: "/docs/advanced/security", type: "guide" },
+        { title: "Scaling & Architecture", href: "/docs/advanced/scaling", type: "guide" },
+      ],
+    },
+  ]
+
+  const resources = [
+    {
+      icon: FileText,
+      title: "PDF Guides",
+      description: "Downloadable comprehensive guides",
+      action: "Download",
+      href: "/resources/guides.pdf",
+    },
+    {
+      icon: Video,
+      title: "Video Tutorials",
+      description: "Step-by-step video walkthroughs",
+      action: "Watch",
+      href: "/resources/videos",
+    },
+    {
+      icon: MessageSquare,
+      title: "Community Forum",
+      description: "Get help from the community",
+      action: "Join",
+      href: "/community",
+    },
+    {
+      icon: ExternalLink,
+      title: "GitHub Repository",
+      description: "Source code and examples",
+      action: "View",
+      href: "https://github.com/main-consulting",
+    },
+  ]
+
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case "tutorial":
+        return <Zap className="h-4 w-4" />
+      case "reference":
+        return <Book className="h-4 w-4" />
+      case "guide":
+        return <FileText className="h-4 w-4" />
+      default:
+        return <FileText className="h-4 w-4" />
     }
-    return typeof current === "string" ? current : `Missing translation for ${key}`
   }
 
-  const isRTL = currentLocale === "ar" // Assuming 'ar' is the only RTL locale
+  const getTypeBadge = (type: string) => {
+    const variants = {
+      tutorial: "default",
+      reference: "secondary",
+      guide: "outline",
+    } as const
+    return variants[type as keyof typeof variants] || "outline"
+  }
 
   return (
-    <div className="flex flex-col min-h-[100dvh]">
+    <div className="flex flex-col min-h-screen">
       <EnhancedNavigation />
+
       <main className="flex-1">
         {/* Hero Section */}
-        <section
-          className={cn(
-            "w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-green-500 to-green-700 text-white",
-            isRTL && "text-right",
-          )}
-        >
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-                  {t("documentationPage.hero.title")}
-                </h1>
-                <p className="max-w-[900px] text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  {t("documentationPage.hero.subtitle")}
-                </p>
+        <section className="py-20 bg-gradient-to-br from-background via-background to-muted/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center space-y-6">
+              <h1 className="text-4xl sm:text-5xl font-bold font-heading gradient-text">Documentation Hub</h1>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Everything you need to build, deploy, and scale AI solutions with our platform. From quick start guides
+                to advanced tutorials.
+              </p>
+
+              {/* Search Bar */}
+              <div className="max-w-md mx-auto">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search documentation..."
+                    className="w-full px-4 py-3 rounded-lg border bg-background/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                  <Button size="sm" className="absolute right-2 top-1/2 -translate-y-1/2">
+                    Search
+                  </Button>
+                </div>
               </div>
-              <Button asChild className="bg-white text-green-600 hover:bg-green-100">
-                <Link href={`/${currentLocale}/documentation`}>{t("documentationPage.hero.cta")}</Link>
-              </Button>
             </div>
           </div>
         </section>
 
-        {/* Sections */}
-        <section className={cn("w-full py-12 md:py-24 lg:py-32", isRTL && "text-right")}>
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  {t("documentationPage.sections.title")}
-                </h2>
-                <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                  {t("documentationPage.description")}
-                </p>
+        {/* Quick Actions */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-2xl font-bold font-heading mb-8 text-center">Quick Actions</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {quickActions.map((action, index) => (
+                  <Card key={index} className="hover-lift glass-effect border-0 bg-background/50 relative group">
+                    {action.badge && (
+                      <Badge
+                        className={cn("absolute top-4 z-10", isRTL ? "left-4" : "right-4")}
+                        variant={action.badge === "Popular" ? "default" : "secondary"}
+                      >
+                        {action.badge}
+                      </Badge>
+                    )}
+                    <CardHeader className="pb-4">
+                      <div className="p-3 rounded-lg bg-primary/10 w-fit group-hover:bg-primary/20 transition-colors">
+                        <action.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <CardTitle className="text-lg">{action.title}</CardTitle>
+                      <CardDescription>{action.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors bg-transparent"
+                      >
+                        <Link href={action.href} className="flex items-center justify-center gap-2">
+                          Get Started
+                          <ArrowRight
+                            className={cn(
+                              "h-4 w-4 transition-transform group-hover:translate-x-1",
+                              isRTL && "group-hover:-translate-x-1",
+                            )}
+                          />
+                        </Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-start gap-8 py-12 sm:grid-cols-1 md:grid-cols-3">
-              <Card>
-                <CardHeader className="flex flex-row items-center space-x-4">
-                  <Book className="h-8 w-8 text-green-500" />
-                  <CardTitle>{t("documentationPage.sections.gettingStarted.title")}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>{t("documentationPage.sections.gettingStarted.description")}</CardDescription>
-                  <ul className="mt-4 space-y-2">
-                    <li>
-                      <Link
-                        className="text-green-600 hover:underline"
-                        href={`/${currentLocale}/documentation/installation`}
-                      >
-                        {t("documentationPage.sections.gettingStarted.link1")}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="text-green-600 hover:underline"
-                        href={`/${currentLocale}/documentation/quick-start`}
-                      >
-                        {t("documentationPage.sections.gettingStarted.link2")}
-                      </Link>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center space-x-4">
-                  <Code className="h-8 w-8 text-green-500" />
-                  <CardTitle>{t("documentationPage.sections.apiReference.title")}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>{t("documentationPage.sections.apiReference.description")}</CardDescription>
-                  <ul className="mt-4 space-y-2">
-                    <li>
-                      <Link
-                        className="text-green-600 hover:underline"
-                        href={`/${currentLocale}/documentation/api/authentication`}
-                      >
-                        {t("documentationPage.sections.apiReference.link1")}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="text-green-600 hover:underline"
-                        href={`/${currentLocale}/documentation/api/agent`}
-                      >
-                        {t("documentationPage.sections.apiReference.link2")}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="text-green-600 hover:underline"
-                        href={`/${currentLocale}/documentation/api/chatbot`}
-                      >
-                        {t("documentationPage.sections.apiReference.link3")}
-                      </Link>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center space-x-4">
-                  <LifeBuoy className="h-8 w-8 text-green-500" />
-                  <CardTitle>{t("documentationPage.sections.troubleshooting.title")}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>{t("documentationPage.sections.troubleshooting.description")}</CardDescription>
-                  <ul className="mt-4 space-y-2">
-                    <li>
-                      <Link
-                        className="text-green-600 hover:underline"
-                        href={`/${currentLocale}/documentation/troubleshooting/common-errors`}
-                      >
-                        {t("documentationPage.sections.troubleshooting.link1")}
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className="text-green-600 hover:underline"
-                        href={`/${currentLocale}/documentation/troubleshooting/debugging-tips`}
-                      >
-                        {t("documentationPage.sections.troubleshooting.link2")}
-                      </Link>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
+          </div>
+        </section>
+
+        {/* Documentation Sections */}
+        <section className="py-16 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-2xl font-bold font-heading mb-8 text-center">Documentation</h2>
+
+              <Tabs defaultValue="all" className="w-full">
+                <TabsList className="grid w-full grid-cols-4 mb-8">
+                  <TabsTrigger value="all">All Docs</TabsTrigger>
+                  <TabsTrigger value="guides">Guides</TabsTrigger>
+                  <TabsTrigger value="tutorials">Tutorials</TabsTrigger>
+                  <TabsTrigger value="reference">Reference</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="all" className="space-y-8">
+                  {documentationSections.map((section, sectionIndex) => (
+                    <div key={sectionIndex}>
+                      <h3 className="text-xl font-semibold mb-4">{section.category}</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {section.items.map((item, itemIndex) => (
+                          <Link
+                            key={itemIndex}
+                            href={item.href}
+                            className="flex items-center gap-3 p-4 rounded-lg border bg-background/50 hover:bg-background transition-colors group"
+                          >
+                            <div className="p-2 rounded bg-muted/50 group-hover:bg-primary/10 transition-colors">
+                              {getTypeIcon(item.type)}
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="font-medium group-hover:text-primary transition-colors">
+                                  {item.title}
+                                </span>
+                                <Badge variant={getTypeBadge(item.type)} className="text-xs">
+                                  {item.type}
+                                </Badge>
+                              </div>
+                            </div>
+                            <ArrowRight
+                              className={cn(
+                                "h-4 w-4 text-muted-foreground group-hover:text-primary transition-all group-hover:translate-x-1",
+                                isRTL && "group-hover:-translate-x-1",
+                              )}
+                            />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </TabsContent>
+
+                <TabsContent value="guides">
+                  <div className="text-center py-12">
+                    <p className="text-muted-foreground">Guide-specific content would be filtered here.</p>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="tutorials">
+                  <div className="text-center py-12">
+                    <p className="text-muted-foreground">Tutorial-specific content would be filtered here.</p>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="reference">
+                  <div className="text-center py-12">
+                    <p className="text-muted-foreground">Reference documentation would be filtered here.</p>
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </div>
+          </div>
+        </section>
+
+        {/* Resources Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-2xl font-bold font-heading mb-8 text-center">Additional Resources</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {resources.map((resource, index) => (
+                  <Card key={index} className="hover-lift text-center">
+                    <CardHeader>
+                      <div className="p-3 rounded-lg bg-primary/10 w-fit mx-auto mb-3">
+                        <resource.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <CardTitle className="text-lg">{resource.title}</CardTitle>
+                      <CardDescription>{resource.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button asChild variant="outline" className="w-full bg-transparent">
+                        <Link href={resource.href} target={resource.href.startsWith("http") ? "_blank" : undefined}>
+                          {resource.action}
+                          {resource.href.startsWith("http") && <ExternalLink className="ml-2 h-4 w-4" />}
+                        </Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Support CTA */}
+        <section className="py-16 bg-primary/5">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center space-y-6">
+              <h2 className="text-3xl font-bold font-heading">Need More Help?</h2>
+              <p className="text-lg text-muted-foreground">
+                Can't find what you're looking for? Our support team is here to help you succeed.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" asChild>
+                  <Link href="/contact">Contact Support</Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/community">Join Community</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
       </main>
+
       <EnhancedFooter />
     </div>
   )

@@ -1,83 +1,43 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Poppins } from "next/font/google"
+import { Inter, Cairo } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "next-themes"
+import { ThemeProvider } from "@/components/theme-provider-enhanced"
 import { TranslationProvider } from "@/lib/i18n-enhanced"
-import { EnhancedNavigation } from "@/components/navigation-enhanced"
-import { EnhancedFooter } from "@/components/footer-enhanced"
 import { Toaster } from "@/components/ui/toaster"
+import { brandConfig } from "@/lib/brand"
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap",
 })
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-poppins",
-  display: "swap",
+const cairo = Cairo({
+  subsets: ["arabic", "latin"],
+  variable: "--font-cairo",
 })
 
 export const metadata: Metadata = {
   title: {
-    default: "main.consulting.sa - AI Solutions & Expert Consulting",
-    template: "%s | main.consulting.sa",
+    default: brandConfig.name,
+    template: `%s | ${brandConfig.name}`,
   },
-  description:
-    "Professional AI consulting services and cutting-edge SaaS solutions for AI agents and chatbots by Asim Abu Salam",
-  keywords: [
-    "AI consulting",
-    "artificial intelligence",
-    "machine learning",
-    "AI agents",
-    "chatbots",
-    "automation",
-    "digital transformation",
-    "Saudi Arabia",
-    "consulting services",
-    "Asim Abu Salam",
-  ],
-  authors: [{ name: "Asim Abu Salam" }],
-  creator: "Asim Abu Salam",
-  publisher: "main.consulting.sa",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL("https://main.consulting.sa"),
-  alternates: {
-    canonical: "/",
-    languages: {
-      "en-US": "/en",
-      "ar-SA": "/ar",
-    },
-  },
+  description: brandConfig.description,
+  keywords: ["AI", "Consulting", "Chatbots", "AI Agents", "Saudi Arabia", "Technology"],
+  authors: [{ name: brandConfig.name }],
+  creator: brandConfig.name,
   openGraph: {
     type: "website",
     locale: "en_US",
-    alternateLocale: "ar_SA",
     url: "https://main.consulting.sa",
-    siteName: "main.consulting.sa",
-    title: "main.consulting.sa - AI Solutions & Expert Consulting",
-    description: "Professional AI consulting services and cutting-edge SaaS solutions for AI agents and chatbots",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "main.consulting.sa - AI Solutions & Expert Consulting",
-      },
-    ],
+    title: brandConfig.name,
+    description: brandConfig.description,
+    siteName: brandConfig.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: "main.consulting.sa - AI Solutions & Expert Consulting",
-    description: "Professional AI consulting services and cutting-edge SaaS solutions",
-    images: ["/og-image.jpg"],
+    title: brandConfig.name,
+    description: brandConfig.description,
     creator: "@mainconsulting",
   },
   robots: {
@@ -101,22 +61,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#3b82f6" />
-        <meta name="color-scheme" content="light dark" />
-      </head>
-      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${cairo.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <TranslationProvider>
-            <div className="relative flex min-h-screen flex-col">
-              <EnhancedNavigation />
-              <main className="flex-1">{children}</main>
-              <EnhancedFooter />
-            </div>
+            {children}
             <Toaster />
           </TranslationProvider>
         </ThemeProvider>

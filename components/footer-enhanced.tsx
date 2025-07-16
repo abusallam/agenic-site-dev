@@ -1,139 +1,199 @@
 "use client"
-
 import Link from "next/link"
-import { Input } from "@/components/ui/input"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
-import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
+import { brandConfig } from "@/lib/brand"
+import { Mail, Phone, MapPin, Clock, Linkedin, Twitter, Github } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function EnhancedFooter() {
   const { t, isRTL } = useEnhancedTranslation()
 
-  const servicesLinks = [
-    { href: "/ai-agents", label: t("nav.aiAgents") },
-    { href: "/chatbots", label: t("nav.chatbots") },
-    { href: "/consulting", label: t("nav.consulting") },
+  const footerSections = [
+    {
+      title: t("footer.company"),
+      links: [
+        { label: "About Us", href: "/about" },
+        { label: "Our Team", href: "/team" },
+        { label: "Careers", href: "/careers" },
+        { label: "News", href: "/news" },
+      ],
+    },
+    {
+      title: t("footer.services"),
+      links: [
+        { label: t("services.aiAgents.title"), href: "/ai-agents" },
+        { label: t("services.chatbots.title"), href: "/chatbots" },
+        { label: t("services.consulting.title"), href: "/consulting" },
+        { label: "Custom Solutions", href: "/custom" },
+      ],
+    },
+    {
+      title: t("footer.resources"),
+      links: [
+        { label: t("nav.documentation"), href: "/documentation" },
+        { label: "Blog", href: "/blog" },
+        { label: "Case Studies", href: "/case-studies" },
+        { label: "Support", href: "/support" },
+      ],
+    },
   ]
 
-  const companyLinks = [
-    { href: "/about", label: "About Us" },
-    { href: "/careers", label: "Careers" },
-    { href: "/blog", label: "Blog" },
+  const contactInfo = [
+    {
+      icon: Mail,
+      label: brandConfig.contact.email,
+      href: `mailto:${brandConfig.contact.email}`,
+    },
+    {
+      icon: Phone,
+      label: brandConfig.contact.phone,
+      href: `tel:${brandConfig.contact.phone}`,
+    },
+    {
+      icon: MapPin,
+      label: brandConfig.contact.address,
+      href: "#",
+    },
+    {
+      icon: Clock,
+      label: brandConfig.contact.hours,
+      href: "#",
+    },
   ]
 
-  const supportLinks = [
-    { href: "/documentation", label: t("nav.documentation") },
-    { href: "/faq", label: "FAQ" },
-    { href: "/contact", label: t("nav.contact") },
-  ]
-
-  const legalLinks = [
-    { href: "/privacy", label: t("footer.links.privacy") },
-    { href: "/terms", label: t("footer.links.terms") },
-    { href: "/cookies", label: t("footer.links.cookies") },
+  const socialLinks = [
+    {
+      icon: Linkedin,
+      href: brandConfig.social.linkedin,
+      label: "LinkedIn",
+    },
+    {
+      icon: Twitter,
+      href: brandConfig.social.twitter,
+      label: "Twitter",
+    },
+    {
+      icon: Github,
+      href: brandConfig.social.github,
+      label: "GitHub",
+    },
   ]
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 py-12 md:py-16">
-      <div className="container grid grid-cols-1 md:grid-cols-5 gap-8 px-4 md:px-6">
-        <div className="md:col-span-2">
-          <Link className="flex items-center gap-2 mb-4" href="/">
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">main.consulting.sa</span>
-          </Link>
-          <p className="text-gray-600 dark:text-gray-400 text-sm mb-6">{t("footer.description")}</p>
-          <div className="flex space-x-4">
-            <Link className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400" href="#">
-              <Facebook className="h-6 w-6" />
-            </Link>
-            <Link className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400" href="#">
-              <Twitter className="h-6 w-6" />
-            </Link>
-            <Link className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400" href="#">
-              <Linkedin className="h-6 w-6" />
-            </Link>
-            <Link className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400" href="#">
-              <Instagram className="h-6 w-6" />
-            </Link>
+    <footer className="bg-background border-t">
+      <div className="container mx-auto px-4">
+        {/* Main Footer Content */}
+        <div className="py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Brand Section */}
+            <div className="lg:col-span-1 space-y-6">
+              <Link href="/" className="flex items-center gap-3">
+                <Image
+                  src={brandConfig.logo.image || "/placeholder.svg"}
+                  alt={brandConfig.name}
+                  width={40}
+                  height={40}
+                />
+                <span className="text-lg font-bold font-heading">{brandConfig.name}</span>
+              </Link>
+
+              <p className="text-muted-foreground text-sm leading-relaxed">{brandConfig.description}</p>
+
+              {/* Social Links */}
+              <div className="flex gap-3">
+                {socialLinks.map((social, index) => (
+                  <Button
+                    key={index}
+                    variant="outline"
+                    size="icon"
+                    asChild
+                    className="hover:bg-primary hover:text-primary-foreground transition-colors bg-transparent"
+                  >
+                    <Link href={social.href} target="_blank" rel="noopener noreferrer">
+                      <social.icon className="h-4 w-4" />
+                      <span className="sr-only">{social.label}</span>
+                    </Link>
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Footer Links */}
+            {footerSections.map((section, index) => (
+              <div key={index} className="space-y-4">
+                <h3 className="font-semibold text-foreground">{section.title}</h3>
+                <ul className="space-y-2">
+                  {section.links.map((link, linkIndex) => (
+                    <li key={linkIndex}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className={cn("grid grid-cols-2 gap-8 md:col-span-3", isRTL && "text-right")}>
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t("footer.services")}</h3>
-            <nav className="space-y-2">
-              {servicesLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  className="text-sm text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 block"
-                  href={link.href}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t("footer.company")}</h3>
-            <nav className="space-y-2">
-              {companyLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  className="text-sm text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 block"
-                  href={link.href}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t("footer.support")}</h3>
-            <nav className="space-y-2">
-              {supportLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  className="text-sm text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 block"
-                  href={link.href}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t("footer.legal")}</h3>
-            <nav className="space-y-2">
-              {legalLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  className="text-sm text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 block"
-                  href={link.href}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+        {/* Contact Section */}
+        <div className="py-8 border-t">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 className="font-semibold text-foreground mb-4">{t("footer.contact")}</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {contactInfo.map((info, index) => (
+                  <Link
+                    key={index}
+                    href={info.href}
+                    className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors group"
+                  >
+                    <info.icon className="h-4 w-4 flex-shrink-0 group-hover:text-primary" />
+                    <span>{info.label}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Newsletter Signup */}
+            <div>
+              <h3 className="font-semibold text-foreground mb-4">Stay Updated</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Subscribe to our newsletter for the latest AI insights and updates.
+              </p>
+              <div className="flex gap-2">
+                <Input type="email" placeholder="Enter your email" className="flex-1" />
+                <Button>Subscribe</Button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="container mt-12 border-t border-gray-200 dark:border-gray-700 pt-8 text-center">
-        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">{t("footer.newsletter.title")}</h3>
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 max-w-md mx-auto">
-          {t("footer.newsletter.description")}
-        </p>
-        <form className="flex flex-col sm:flex-row gap-4 max-w-sm mx-auto">
-          <Input
-            type="email"
-            placeholder={t("footer.newsletter.placeholder")}
-            className="flex-1 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700"
-          />
-          <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white">
-            {t("footer.newsletter.subscribe")}
-          </Button>
-        </form>
-        <p className="text-gray-500 dark:text-gray-500 text-xs mt-8">{t("footer.copyright")}</p>
+        {/* Bottom Bar */}
+        <div
+          className={cn(
+            "py-6 border-t flex flex-col sm:flex-row justify-between items-center gap-4",
+            isRTL && "sm:flex-row-reverse",
+          )}
+        >
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} {brandConfig.name}. {t("footer.rights")}
+          </p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              {t("footer.privacy")}
+            </Link>
+            <Link href="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              {t("footer.terms")}
+            </Link>
+          </div>
+        </div>
       </div>
     </footer>
   )
