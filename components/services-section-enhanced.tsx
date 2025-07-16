@@ -57,7 +57,8 @@ export function EnhancedServicesSection() {
             {services.map((service, index) => (
               <Card
                 key={index}
-                className="group hover-lift glass-effect border-0 bg-background/50 relative overflow-hidden"
+                className="group hover-lift glass-effect border-0 bg-background/50 relative overflow-hidden animate-fade-in-up"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Badge */}
                 {service.badge && (

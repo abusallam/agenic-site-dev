@@ -18,8 +18,10 @@ const translations = {
     // Navigation
     "nav.home": "Home",
     "nav.services": "Services",
+    "nav.pricing": "Pricing",
     "nav.consulting": "Consulting",
     "nav.documentation": "Documentation",
+    "nav.about": "About Us",
     "nav.contact": "Contact",
     "nav.login": "Login",
     "nav.signup": "Sign Up",
@@ -29,24 +31,24 @@ const translations = {
     "nav.logout": "Logout",
 
     // Hero Section
-    "hero.title": "Transform Your Business with AI Solutions",
-    "hero.subtitle": "Professional AI consulting services and cutting-edge SaaS solutions for modern businesses",
-    "hero.cta.primary": "Get Started",
-    "hero.cta.secondary": "Learn More",
-    "hero.stats.clients": "Happy Clients",
-    "hero.stats.projects": "Projects Completed",
-    "hero.stats.experience": "Years Experience",
-    "hero.stats.satisfaction": "Client Satisfaction",
+    "hero.title": "Your Portal to Online Technology Services",
+    "hero.subtitle": "Streamline your business with our comprehensive suite of online technology services. From AI-powered solutions to expert consulting, we have everything you need to succeed in the digital age.",
+    "hero.cta.primary": "Explore Services",
+    "hero.cta.secondary": "Request a Consultation",
+    "hero.stats.clients": "Satisfied Clients",
+    "hero.stats.projects": "Successful Projects",
+    "hero.stats.experience": "Years of Expertise",
+    "hero.stats.satisfaction": "Customer Satisfaction",
 
     // Services
-    "services.title": "Our AI Solutions",
-    "services.subtitle": "Comprehensive AI services to accelerate your digital transformation",
+    "services.title": "Our Services",
+    "services.subtitle": "We offer a wide range of services to help you achieve your goals. Explore our offerings below.",
     "services.aiAgents.title": "AI Agents",
-    "services.aiAgents.description": "Intelligent automation solutions",
+    "services.aiAgents.description": "Deploy intelligent agents to automate complex workflows and drive efficiency.",
     "services.chatbots.title": "Chatbots",
-    "services.chatbots.description": "Conversational AI interfaces",
-    "services.consulting.title": "AI Consulting",
-    "services.consulting.description": "Strategic AI implementation guidance",
+    "services.chatbots.description": "Engage your customers with smart, conversational AI chatbots.",
+    "services.consulting.title": "IT Consulting",
+    "services.consulting.description": "Get expert guidance to navigate the complexities of digital transformation.",
 
     // Footer
     "footer.company": "Company",
@@ -80,13 +82,31 @@ const translations = {
     "auth.signup.submit": "Create Account",
     "auth.signup.hasAccount": "Already have an account?",
     "auth.signup.signIn": "Sign in",
+
+    // Services Page
+    "servicesPage.title": "Our Services",
+    "servicesPage.description": "We offer a wide range of services to help you achieve your goals.",
+
+    // Pricing Page
+    "pricingPage.title": "Pricing",
+    "pricingPage.description": "Find the perfect plan for your needs.",
+
+    // About Page
+    "aboutPage.title": "About Us",
+    "aboutPage.description": "Learn more about our company and our mission.",
+
+    // Contact Page
+    "contactPage.title": "Contact Us",
+    "contactPage.description": "Get in touch with us for any inquiries.",
   },
   ar: {
     // Navigation
     "nav.home": "الرئيسية",
     "nav.services": "الخدمات",
+    "nav.pricing": "الأسعار",
     "nav.consulting": "الاستشارات",
     "nav.documentation": "التوثيق",
+    "nav.about": "من نحن",
     "nav.contact": "اتصل بنا",
     "nav.login": "تسجيل الدخول",
     "nav.signup": "إنشاء حساب",
@@ -96,24 +116,24 @@ const translations = {
     "nav.logout": "تسجيل الخروج",
 
     // Hero Section
-    "hero.title": "حوّل عملك بحلول الذكاء الاصطناعي",
-    "hero.subtitle": "خدمات استشارية احترافية للذكاء الاصطناعي وحلول SaaS متطورة للشركات الحديثة",
-    "hero.cta.primary": "ابدأ الآن",
-    "hero.cta.secondary": "اعرف المزيد",
-    "hero.stats.clients": "عميل راضٍ",
-    "hero.stats.projects": "مشروع مكتمل",
-    "hero.stats.experience": "سنوات خبرة",
+    "hero.title": "بوابتك لخدمات التكنولوجيا عبر الإنترنت",
+    "hero.subtitle": "قم بتبسيط أعمالك من خلال مجموعتنا الشاملة من خدمات التكنولوجيا عبر الإنترنت. من الحلول المدعومة بالذكاء الاصطناعي إلى استشارات الخبراء، لدينا كل ما تحتاجه للنجاح في العصر الرقمي.",
+    "hero.cta.primary": "اكتشف الخدمات",
+    "hero.cta.secondary": "اطلب استشارة",
+    "hero.stats.clients": "عملاء راضون",
+    "hero.stats.projects": "مشاريع ناجحة",
+    "hero.stats.experience": "سنوات من الخبرة",
     "hero.stats.satisfaction": "رضا العملاء",
 
     // Services
-    "services.title": "حلول الذكاء الاصطناعي",
-    "services.subtitle": "خدمات شاملة للذكاء الاصطناعي لتسريع التحول الرقمي",
+    "services.title": "خدماتنا",
+    "services.subtitle": "نحن نقدم مجموعة واسعة من الخدمات لمساعدتك على تحقيق أهدافك. اكتشف عروضنا أدناه.",
     "services.aiAgents.title": "وكلاء الذكاء الاصطناعي",
-    "services.aiAgents.description": "حلول الأتمتة الذكية",
+    "services.aiAgents.description": "انشر وكلاء أذكياء لأتمتة مهام سير العمل المعقدة وزيادة الكفاءة.",
     "services.chatbots.title": "روبوتات المحادثة",
-    "services.chatbots.description": "واجهات الذكاء الاصطناعي التحاورية",
-    "services.consulting.title": "استشارات الذكاء الاصطناعي",
-    "services.consulting.description": "إرشادات تنفيذ الذكاء الاصطناعي الاستراتيجية",
+    "services.chatbots.description": "تفاعل مع عملائك من خلال روبوتات محادثة ذكية تعمل بالذكاء الاصطناعي.",
+    "services.consulting.title": "استشارات تكنولوجيا المعلومات",
+    "services.consulting.description": "احصل على إرشادات الخبراء للتغلب على تعقيدات التحول الرقمي.",
 
     // Footer
     "footer.company": "الشركة",
@@ -147,6 +167,22 @@ const translations = {
     "auth.signup.submit": "إنشاء حساب",
     "auth.signup.hasAccount": "لديك حساب بالفعل؟",
     "auth.signup.signIn": "تسجيل الدخول",
+
+    // Services Page
+    "servicesPage.title": "خدماتنا",
+    "servicesPage.description": "نحن نقدم مجموعة واسعة من الخدمات لمساعدتك على تحقيق أهدافك.",
+
+    // Pricing Page
+    "pricingPage.title": "الأسعار",
+    "pricingPage.description": "ابحث عن الخطة المثالية لاحتياجاتك.",
+
+    // About Page
+    "aboutPage.title": "من نحن",
+    "aboutPage.description": "اعرف المزيد عن شركتنا ومهمتنا.",
+
+    // Contact Page
+    "contactPage.title": "اتصل بنا",
+    "contactPage.description": "تواصل معنا لأي استفسارات.",
   },
 }
 

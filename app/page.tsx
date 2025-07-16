@@ -1,6 +1,7 @@
 import { EnhancedNavigation } from "@/components/navigation-enhanced"
 import { EnhancedHeroSection } from "@/components/hero-section-enhanced"
 import { EnhancedServicesSection } from "@/components/services-section-enhanced"
+import { EnhancedTestimonialsSection } from "@/components/testimonials-section-enhanced"
 import { EnhancedFooter } from "@/components/footer-enhanced"
 
 export default function HomePage() {
@@ -10,6 +11,7 @@ export default function HomePage() {
       <main className="flex-1">
         <EnhancedHeroSection />
         <EnhancedServicesSection />
+        <EnhancedTestimonialsSection />
       </main>
       <EnhancedFooter />
     </div>
