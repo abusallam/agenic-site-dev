@@ -121,7 +121,14 @@ export default function DocumentationPage() {
   )
 }
 
-function Card({ icon: Icon, title, description, href }) {
+interface CardProps {
+  icon: React.ComponentType<{ className?: string }>
+  title: string
+  description: string
+  href: string
+}
+
+function Card({ icon: Icon, title, description, href }: CardProps) {
   return (
     <a href={href} className="block p-6 rounded-lg border bg-background/50 hover:bg-background transition-colors group">
       <div className="flex items-center gap-4 mb-4">
@@ -135,7 +142,15 @@ function Card({ icon: Icon, title, description, href }) {
   )
 }
 
-function ResourceCard({ icon: Icon, title, description, action, href }) {
+interface ResourceCardProps {
+  icon: React.ComponentType<{ className?: string }>
+  title: string
+  description: string
+  action: string
+  href: string
+}
+
+function ResourceCard({ icon: Icon, title, description, action, href }: ResourceCardProps) {
   return (
     <a href={href} className="block p-6 rounded-lg border bg-background/50 hover:bg-background transition-colors group text-center">
       <div className="p-3 rounded-lg bg-primary/10 w-fit mx-auto mb-3">

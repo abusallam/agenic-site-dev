@@ -1,7 +1,7 @@
 export const brandConfig = {
-  name: "POTS",
-  tagline: "Portal for Online Technology Services",
-  description: "Your one-stop portal for online technology services.",
+  name: "Main Consulting",
+  tagline: "AI Consulting & Digital Transformation",
+  description: "Professional AI consulting services and SaaS solutions specializing in artificial intelligence, chatbots, AI agents, and digital transformation.",
   logo: {
     image: "/logo.webp",
     width: 48,
