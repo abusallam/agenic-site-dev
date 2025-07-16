@@ -13,7 +13,7 @@ export interface TranslationContextType {
   isRTL: boolean
 }
 
-const translations = {
+export const translations = {
   en: {
     // Navigation
     "nav.home": "Home",

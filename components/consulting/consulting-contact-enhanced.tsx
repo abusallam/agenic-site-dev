@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { useEnhancedTranslation } from "@/lib/i18n-enhanced.tsx"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 

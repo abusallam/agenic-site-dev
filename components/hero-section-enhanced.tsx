@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { useEnhancedTranslation } from "@/lib/i18n-enhanced.tsx"
 import { ArrowRight, Users, CheckCircle, Clock, Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 

@@ -1,27 +1,21 @@
 import type { Metadata } from "next"
 import ConsultingClientPage from "./ConsultingClientPage"
-import { translations } from "@/lib/i18n-enhanced" // Import translations directly for metadata
+import { translations } from "@/lib/i18n-enhanced.tsx" // Import translations directly for metadata
 
 // Function to generate metadata for each locale
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const locale = params.locale || "en"
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
+  const locale = params.lang || "en"
   const t = (key: string) => {
-    const keys = key.split(".")
-    let current: any = translations[locale] || translations.en
-    for (const k of keys) {
-      if (current && typeof current === "object" && k in current) {
-        current = current[k]
-      } else {
-        return `Missing translation for ${key}`
-      }
+    const translationsForLocale = translations[locale as keyof typeof translations];
+    if (!translationsForLocale) {
+      // Fallback to English if the locale doesn't exist
+      return translations.en[key as keyof typeof translations.en] || key;
     }
-    return typeof current === "string" ? current : `Missing translation for ${key}`
-  }
-
+    return translationsForLocale[key as keyof typeof translationsForLocale] || key;
+  };
   return {
-    title: t("consultingPage.title"),
-    description: t("consultingPage.description"),
-  }
+    title: t("nav.consulting"),
+  };
 }
 
 export default function ConsultingPage() {

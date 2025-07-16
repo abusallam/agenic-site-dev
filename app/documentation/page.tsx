@@ -1,7 +1,7 @@
 "use client"
 import { EnhancedNavigation } from "@/components/navigation-enhanced"
 import { EnhancedFooter } from "@/components/footer-enhanced"
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
+import { useEnhancedTranslation } from "@/lib/i18n-enhanced.tsx"
 import { Code, Rocket, Settings, Users, FileText, Video, MessageSquare, ExternalLink } from "lucide-react"
 
 export default function DocumentationPage() {
