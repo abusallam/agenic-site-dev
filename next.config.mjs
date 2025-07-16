@@ -1,24 +1,22 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    unoptimized: true,
-  },
-  experimental: {
-    esmExternals: true,
-  },
-  webpack: (config) => {
-    config.resolve.extensionAlias = {
-      '.js': ['.js', '.ts', '.tsx'],
-      '.jsx': ['.jsx', '.tsx'],
-    }
-    return config
-  },
-}
+import nextComposePlugins from 'next-compose-plugins';
+import nextImages from 'next-images';
 
-export default nextConfig
+const { withPlugins } = nextComposePlugins;
+const withImagesPlugin = nextImages;
+
+const nextConfig = {
+  images: {
+    domains: ['placehold.co'],
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        sharp: false,
+      };
+    }
+    return config;
+  },
+};
+
+export default withPlugins([withImagesPlugin], nextConfig);
