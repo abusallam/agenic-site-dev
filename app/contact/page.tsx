@@ -1,7 +1,7 @@
 "use client"
 import { EnhancedNavigation } from "@/components/navigation-enhanced"
 import { EnhancedFooter } from "@/components/footer-enhanced"
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced.tsx"
+import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
 
 export default function ContactPage() {
   const { t } = useEnhancedTranslation()

@@ -113,7 +113,7 @@ export function CustomButton({ variant = 'primary', children, onClick }: ButtonP
 ## 🌐 Internationalization
 
 - Support both **English** and **Arabic** languages
-- Use the translation system in `lib/i18n-enhanced.tsx`
+- Use the translation system in `lib/i18n-enhanced`
 - Add new translation keys to both language files
 - Test RTL (right-to-left) layout for Arabic
 

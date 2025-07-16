@@ -38,7 +38,7 @@ export default function ConfigurationPage() {
             <h2 id="internationalization">Internationalization</h2>
             <p>
               The application uses a simple i18n implementation to support multiple languages. The translations are
-              stored in the <code>lib/i18n-enhanced.tsx</code> file. You can add new languages and translations to this
+              stored in the <code>lib/i18n-enhanced</code> file. You can add new languages and translations to this
               file to support additional locales.
             </p>
           </div>

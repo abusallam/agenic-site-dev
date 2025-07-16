@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Inter, Cairo } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider-enhanced"
-import { TranslationProvider } from "@/lib/i18n-enhanced.tsx"
+import { TranslationProvider } from "@/lib/i18n-enhanced"
 import { Toaster } from "@/components/ui/toaster"
 import { brandConfig } from "@/lib/brand"
 

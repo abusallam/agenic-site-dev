@@ -1,6 +1,6 @@
 "use client"
 
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced.tsx"
+import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
 import { cn } from "@/lib/utils"
 
 export function EnhancedConsultingAbout() {
