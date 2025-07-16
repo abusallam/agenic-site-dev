@@ -27,8 +27,10 @@ export function EnhancedNavigation() {
   const navItems = [
     { href: "/", label: t("nav.home") },
     { href: "/services", label: t("nav.services") },
+    { href: "/pricing", label: t("nav.pricing") },
     { href: "/consulting", label: t("nav.consulting") },
     { href: "/documentation", label: t("nav.documentation") },
+    { href: "/about", label: t("nav.about") },
     { href: "/contact", label: t("nav.contact") },
   ]
 
@@ -61,7 +63,7 @@ export function EnhancedNavigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
+                className="text-sm font-medium text-muted-foreground hover:text-primary hover:bg-accent/50 px-3 py-2 rounded-md transition-colors relative group"
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />

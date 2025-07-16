@@ -1,18 +1,18 @@
 export const brandConfig = {
-  name: "Main Consulting",
-  tagline: "AI Solutions & Expert Consulting",
-  description: "Transform your business with professional AI consulting services and cutting-edge SaaS solutions.",
+  name: "POTS",
+  tagline: "Portal for Online Technology Services",
+  description: "Your one-stop portal for online technology services.",
   logo: {
     image: "/logo.webp",
     width: 48,
     height: 48,
   },
   colors: {
-    primary: "#FF6B35", // Orange from logo
+    primary: "#FF6B35", // Orange accent
     secondary: "#4ECDC4", // Teal accent
     accent: "#45B7D1", // Blue accent
-    dark: "#2C3E50", // Dark blue
-    light: "#F8F9FA", // Light gray
+    dark: "#0A2540", // Dark Blue
+    light: "#F8F9FA", // Light Neutral
   },
   contact: {
     email: "asim@main.consulting.sa",

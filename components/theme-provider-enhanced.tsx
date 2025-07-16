@@ -10,9 +10,11 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
 
+import { useTheme } from "next-themes"
+
 export function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
-  const { theme, setTheme } = React.useContext(React.createContext({ theme: "light", setTheme: () => {} }))
 
   React.useEffect(() => {
     setMounted(true)

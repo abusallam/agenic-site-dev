@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { translations } from "@/lib/i18n-enhanced"
-import AIAgentsClientPage from "./AIAgentsClientPage"
+import ServicesClientPage from "./ServicesClientPage"
 
 // Function to generate metadata for each locale
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   }
 
   return {
-    title: t("aiAgentsPage.title"),
-    description: t("aiAgentsPage.description"),
+    title: t("servicesPage.title"),
+    description: t("servicesPage.description"),
   }
 }
 
-export default function AIAgentsPage() {
-  return <AIAgentsClientPage />
+export default function ServicesPage() {
+  return <ServicesClientPage />
 }

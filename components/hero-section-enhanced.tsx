@@ -54,7 +54,7 @@ export function EnhancedHeroSection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           {/* Main Content */}
-          <div className="space-y-6">
+          <div className="space-y-6 animate-fade-in-up">
             <h1
               className={cn(
                 "text-4xl sm:text-5xl lg:text-6xl font-bold font-heading leading-tight",
@@ -91,7 +91,11 @@ export function EnhancedHeroSection() {
           {/* Stats Cards */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-16">
             {stats.map((stat, index) => (
-              <Card key={index} className="hover-lift glass-effect border-0 bg-background/50">
+              <Card
+                key={index}
+                className="hover-lift glass-effect border-0 bg-background/50 animate-fade-in-up"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
                 <CardContent className="p-6 text-center">
                   <stat.icon className="h-8 w-8 mx-auto mb-3 text-primary" />
                   <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
