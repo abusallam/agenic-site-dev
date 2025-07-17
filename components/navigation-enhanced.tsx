@@ -51,6 +51,7 @@ export function EnhancedNavigation() {
               width={brandConfig.logo.width}
               height={brandConfig.logo.height}
               className="transition-transform duration-300 group-hover:scale-110"
+              style={{ width: "auto", height: "auto" }}
             />
             <span className="text-xl font-bold font-heading bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               {brandConfig.name}

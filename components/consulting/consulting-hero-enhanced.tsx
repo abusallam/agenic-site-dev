@@ -10,55 +10,55 @@ export function EnhancedConsultingHero() {
   const { t, isRTL } = useEnhancedTranslation()
 
   const expertiseAreas = [
-    "AI Strategy Development",
-    "Machine Learning Implementation",
-    "Digital Transformation",
-    "Process Automation",
-    "Team Training & Development",
+    t("consultingPage.hero.expertiseAreas.aiStrategy"),
+    t("consultingPage.hero.expertiseAreas.mlImplementation"),
+    t("consultingPage.hero.expertiseAreas.digitalTransformation"),
+    t("consultingPage.hero.expertiseAreas.processAutomation"),
+    t("consultingPage.hero.expertiseAreas.teamTraining"),
   ]
 
   const stats = [
-    { number: "10+", label: "Years Experience", icon: Award },
-    { number: "200+", label: "Successful Projects", icon: Briefcase },
-    { number: "300%", label: "Average ROI Increase", icon: DollarSign },
-    { number: "50+", label: "Enterprise Clients", icon: Users },
+    { number: "10+", label: t("consultingPage.hero.stats.yearsExperience"), icon: Award },
+    { number: "200+", label: t("consultingPage.hero.stats.successfulProjects"), icon: Briefcase },
+    { number: "300%", label: t("consultingPage.hero.stats.roiIncrease"), icon: DollarSign },
+    { number: "50+", label: t("consultingPage.hero.stats.enterpriseClients"), icon: Users },
   ]
 
   const services = [
     {
-      title: "AI Strategy Development",
-      description: "Comprehensive AI roadmap aligned with your business objectives and market opportunities.",
+      title: t("consultingPage.hero.services.aiStrategy.title"),
+      description: t("consultingPage.hero.services.aiStrategy.description"),
       duration: "2-4 weeks",
       deliverables: [
-        "Current state assessment",
-        "AI opportunity identification",
-        "Implementation roadmap",
-        "ROI projections",
-        "Risk assessment",
+        t("consultingPage.hero.services.aiStrategy.deliverables.assessment"),
+        t("consultingPage.hero.services.aiStrategy.deliverables.opportunity"),
+        t("consultingPage.hero.services.aiStrategy.deliverables.roadmap"),
+        t("consultingPage.hero.services.aiStrategy.deliverables.roi"),
+        t("consultingPage.hero.services.aiStrategy.deliverables.risk"),
       ],
     },
     {
-      title: "Implementation Consulting",
-      description: "Hands-on guidance for successful AI project execution and deployment.",
+      title: t("consultingPage.hero.services.implementation.title"),
+      description: t("consultingPage.hero.services.implementation.description"),
       duration: "3-6 months",
       deliverables: [
-        "Technical architecture design",
-        "Team training and development",
-        "Vendor selection guidance",
-        "Project management support",
-        "Quality assurance",
+        t("consultingPage.hero.services.implementation.deliverables.architecture"),
+        t("consultingPage.hero.services.implementation.deliverables.training"),
+        t("consultingPage.hero.services.implementation.deliverables.vendor"),
+        t("consultingPage.hero.services.implementation.deliverables.project"),
+        t("consultingPage.hero.services.implementation.deliverables.qa"),
       ],
     },
     {
-      title: "Digital Transformation",
-      description: "Complete organizational transformation with AI at the core of your business strategy.",
+      title: t("consultingPage.hero.services.digitalTransformation.title"),
+      description: t("consultingPage.hero.services.digitalTransformation.description"),
       duration: "6-12 months",
       deliverables: [
-        "Organization-wide AI strategy",
-        "Change management support",
-        "Multi-phase implementation",
-        "Performance monitoring",
-        "Continuous optimization",
+        t("consultingPage.hero.services.digitalTransformation.deliverables.strategy"),
+        t("consultingPage.hero.services.digitalTransformation.deliverables.change"),
+        t("consultingPage.hero.services.digitalTransformation.deliverables.multiPhase"),
+        t("consultingPage.hero.services.digitalTransformation.deliverables.performance"),
+        t("consultingPage.hero.services.digitalTransformation.deliverables.optimization"),
       ],
     },
   ]

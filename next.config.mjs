@@ -6,7 +6,16 @@ const withImagesPlugin = nextImages;
 
 const nextConfig = {
   images: {
-    domains: ['placehold.co'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+      },
+    ],
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {

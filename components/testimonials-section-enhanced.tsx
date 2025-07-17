@@ -10,22 +10,19 @@ export function EnhancedTestimonialsSection() {
     {
       name: "John Doe",
       title: "CEO, Example Inc.",
-      quote:
-        "POTS has been a game-changer for our business. Their AI-powered solutions have helped us automate our workflows and improve our efficiency.",
+      quote: "testimonials.quote1",
       avatar: "/placeholder-user.jpg",
     },
     {
       name: "Jane Smith",
       title: "CTO, Another Co.",
-      quote:
-        "The team at POTS is top-notch. They are experts in their field and have been a pleasure to work with. I would highly recommend them to anyone looking for IT consulting services.",
+      quote: "testimonials.quote2",
       avatar: "/placeholder-user.jpg",
     },
     {
       name: "Sam Wilson",
       title: "Founder, Startup LLC",
-      quote:
-        "We were looking for a way to engage with our customers more effectively, and POTS delivered. Their chatbots have helped us improve our customer satisfaction and increase our sales.",
+      quote: "testimonials.quote3",
       avatar: "/placeholder-user.jpg",
     },
   ]
@@ -34,10 +31,9 @@ export function EnhancedTestimonialsSection() {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h2 className="text-3xl sm:text-4xl font-bold font-heading">What Our Clients Say</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold font-heading">{t("testimonials.title")}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We are proud to have helped so many businesses succeed. Here's what some of our clients have to say about
-            us.
+            {t("testimonials.subtitle")}
           </p>
         </div>
 
@@ -62,7 +58,7 @@ export function EnhancedTestimonialsSection() {
                   <Star key={i} className="h-5 w-5 text-primary" fill="currentColor" />
                 ))}
               </div>
-              <p className="text-muted-foreground">{testimonial.quote}</p>
+              <p className="text-muted-foreground">{t(testimonial.quote)}</p>
             </div>
           ))}
         </div>
