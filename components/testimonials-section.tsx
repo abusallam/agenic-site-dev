@@ -127,8 +127,9 @@ export function TestimonialsSection() {
                               .split(" ")
                               .map((n) => n[0])
                               .join("")
-                            if (e.currentTarget.nextElementSibling) {
-                              e.currentTarget.nextElementSibling.textContent = initials
+                            const nextElement = e.currentTarget.nextElementSibling as HTMLElement | null;
+                            if (nextElement) {
+                              nextElement.textContent = initials;
                             }
                             (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = "flex"
                           }}
