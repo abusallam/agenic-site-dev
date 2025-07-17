@@ -127,7 +127,9 @@ export function TestimonialsSection() {
                               .split(" ")
                               .map((n) => n[0])
                               .join("")
-                            e.currentTarget.nextElementSibling!.textContent = initials
+                            if (e.currentTarget.nextElementSibling) {
+                              e.currentTarget.nextElementSibling.textContent = initials
+                            }
                             (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = "flex"
                           }}
                         />
