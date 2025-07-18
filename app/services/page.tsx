@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { translations } from "@/lib/i18n-enhanced"
 import ServicesClientPage from "./ServicesClientPage"
 
 export const metadata: Metadata = {

@@ -1,11 +1,9 @@
 "use client"
 import { EnhancedNavigation } from "@/components/navigation-enhanced"
 import { EnhancedFooter } from "@/components/footer-enhanced"
-import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
 import { Code, Rocket, Settings, Users, FileText, Video, MessageSquare, ExternalLink } from "lucide-react"
 
 export default function DocumentationPage() {
-  const { t } = useEnhancedTranslation()
 
   return (
     <div className="flex flex-col min-h-screen">

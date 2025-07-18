@@ -48,7 +48,7 @@ export default function SignupPage() {
     }
 
     try {
-      const { data, error } = await authHelpers.signUp(email, password, {
+      const { error } = await authHelpers.signUp(email, password, {
         first_name: firstName,
         last_name: lastName,
         company,
@@ -60,7 +60,7 @@ export default function SignupPage() {
         // Redirect to verification page or dashboard
         window.location.href = "/auth/verify-email"
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred")
     } finally {
       setIsLoading(false)

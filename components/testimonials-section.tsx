@@ -122,13 +122,16 @@ export function TestimonialsSection() {
                           className="rounded-full object-cover"
                           onError={(e) => {
                             // Fallback to initials
-                            e.currentTarget.style.display = "none"
-                            const initials = testimonials[currentIndex].name
-                              .split(" ")
-                              .map((n) => n[0])
-                              .join("")
-                            e.currentTarget.nextElementSibling!.textContent = initials
-                            (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = "flex"
+                            e.currentTarget.style.display = 'none';
+                            const sibling = e.currentTarget.nextElementSibling as HTMLElement | null;
+                            if (sibling) {
+                                const initials = testimonials[currentIndex].name
+                                    .split(' ')
+                                    .map((n) => n[0])
+                                    .join('');
+                                sibling.textContent = initials;
+                                sibling.style.display = 'flex';
+                            }
                           }}
                         />
                         <span className="hidden text-blue-600 font-bold text-lg items-center justify-center h-full w-full"></span>

@@ -75,7 +75,7 @@ export const authHelpers = {
         },
       })
       return { data, error }
-    } catch (err) {
+    } catch {
       return { data: null, error: { message: "Authentication service unavailable" } }
     }
   },
@@ -87,7 +87,7 @@ export const authHelpers = {
         password,
       })
       return { data, error }
-    } catch (err) {
+    } catch {
       return { data: null, error: { message: "Authentication service unavailable" } }
     }
   },
@@ -96,7 +96,7 @@ export const authHelpers = {
     try {
       const { error } = await supabase.auth.signOut()
       return { error }
-    } catch (err) {
+    } catch {
       return { error: { message: "Authentication service unavailable" } }
     }
   },
@@ -108,7 +108,7 @@ export const authHelpers = {
         error,
       } = await supabase.auth.getUser()
       return { user, error }
-    } catch (err) {
+    } catch {
       return { user: null, error: { message: "Authentication service unavailable" } }
     }
   },
@@ -117,7 +117,7 @@ export const authHelpers = {
     try {
       const { data, error } = await supabase.auth.resetPasswordForEmail(email)
       return { data, error }
-    } catch (err) {
+    } catch {
       return { data: null, error: { message: "Authentication service unavailable" } }
     }
   },
@@ -129,7 +129,7 @@ export const dbHelpers = {
     try {
       const { data, error } = await supabase.from("contact_submissions").insert([submission]).select()
       return { data, error }
-    } catch (err) {
+    } catch {
       return { data: null, error: { message: "Database service unavailable" } }
     }
   },
@@ -138,7 +138,7 @@ export const dbHelpers = {
     try {
       const { data, error } = await supabase.from("newsletter_subscriptions").insert([{ email }]).select()
       return { data, error }
-    } catch (err) {
+    } catch {
       return { data: null, error: { message: "Database service unavailable" } }
     }
   },
@@ -147,7 +147,7 @@ export const dbHelpers = {
     try {
       const { data, error } = await supabase.from("user_profiles").select("*").eq("id", userId).single()
       return { data, error }
-    } catch (err) {
+    } catch {
       return { data: null, error: { message: "Database service unavailable" } }
     }
   },
@@ -156,7 +156,7 @@ export const dbHelpers = {
     try {
       const { data, error } = await supabase.from("user_profiles").update(updates).eq("id", userId).select()
       return { data, error }
-    } catch (err) {
+    } catch {
       return { data: null, error: { message: "Database service unavailable" } }
     }
   },

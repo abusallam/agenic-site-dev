@@ -30,7 +30,7 @@ export default function LoginPage() {
     const password = formData.get("password") as string
 
     try {
-      const { data, error } = await authHelpers.signIn(email, password)
+      const { error } = await authHelpers.signIn(email, password)
 
       if (error) {
         setError(error.message)
@@ -38,7 +38,7 @@ export default function LoginPage() {
         // Redirect to dashboard or home page
         window.location.href = "/"
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred")
     } finally {
       setIsLoading(false)

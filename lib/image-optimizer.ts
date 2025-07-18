@@ -2,7 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const sharp = require('sharp');
 
-const optimizeImages = async (dir) => {
+const optimizeImages = async (dir: string) => {
   const files = await fs.readdir(dir);
 
   for (const file of files) {

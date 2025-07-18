@@ -68,9 +68,7 @@ const ChartContainer = React.forwardRef<
 ChartContainer.displayName = "Chart"
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
-  const colorConfig = Object.entries(config).filter(
-    ([_, config]) => config.theme || config.color
-  )
+  const colorConfig = Object.entries(config).filter(([, config]) => config.theme || config.color)
 
   if (!colorConfig.length) {
     return null
@@ -319,7 +317,7 @@ ChartLegendContent.displayName = "ChartLegend"
 // Helper to extract item config from a payload.
 function getPayloadConfigFromPayload(
   config: ChartConfig,
-  payload: unknown,
+  payload: any, // Allow any type for payload
   key: string
 ) {
   if (typeof payload !== "object" || payload === null) {
