@@ -1,12 +1,4 @@
-import nextComposePlugins from 'next-compose-plugins'
-import nextImages from 'next-images'
-
-const { withPlugins } = nextComposePlugins
-const withImagesPlugin = nextImages
-
-// Bundle analyzer is optional - only used for development analysis
-const withBundleAnalyzer = (config) => config
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   // Output configuration for Docker deployment
   output: 'standalone',
@@ -152,4 +144,4 @@ const nextConfig = {
   },
 }
 
-export default withBundleAnalyzer(withPlugins([withImagesPlugin], nextConfig))
+export default nextConfig
