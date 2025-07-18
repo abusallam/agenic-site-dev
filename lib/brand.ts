@@ -1,7 +1,10 @@
 export const brandConfig = {
-  name: "Main Consulting",
+  name: "consulting.sa",
+  nameArabic: "المستشار.السعودية",
   tagline: "AI Consulting & Digital Transformation",
+  taglineArabic: "استشارات الذكاء الاصطناعي والتحول الرقمي",
   description: "Professional AI consulting services and SaaS solutions specializing in artificial intelligence, chatbots, AI agents, and digital transformation.",
+  descriptionArabic: "خدمات استشارية احترافية للذكاء الاصطناعي وحلول SaaS متخصصة في الذكاء الاصطناعي وروبوتات المحادثة ووكلاء الذكاء الاصطناعي والتحول الرقمي.",
   logo: {
     image: "/logo.webp",
     width: 48,
@@ -15,14 +18,16 @@ export const brandConfig = {
     light: "#F8F9FA", // Light Neutral
   },
   contact: {
-    email: "asim@main.consulting.sa",
+    email: "asim@consulting.sa",
     phone: "+966 XX XXX XXXX",
     address: "Saudi Arabia",
+    addressArabic: "المملكة العربية السعودية",
     hours: "Available Mon-Fri, 9AM-6PM AST",
+    hoursArabic: "متاح من الاثنين إلى الجمعة، 9 صباحاً - 6 مساءً بتوقيت السعودية",
   },
   social: {
-    linkedin: "https://linkedin.com/company/main-consulting",
-    twitter: "https://twitter.com/mainconsulting",
-    github: "https://github.com/main-consulting",
+    linkedin: "https://linkedin.com/company/consulting-sa",
+    twitter: "https://twitter.com/consultingsa",
+    github: "https://github.com/consulting-sa",
   },
 }

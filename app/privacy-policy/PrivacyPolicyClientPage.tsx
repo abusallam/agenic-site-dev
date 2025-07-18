@@ -13,7 +13,7 @@ export default function PrivacyPolicyClientPage() {
       title: "1. Information We Collect",
       content: (
         <div className="space-y-4 text-muted-foreground">
-          <p>At Main Consulting, we collect information you provide directly to us, such as when you:</p>
+          <p>At consulting.sa (المستشار.السعودية), we collect information you provide directly to us, such as when you:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>Contact us through our website forms</li>
             <li>Subscribe to our newsletter</li>
@@ -191,14 +191,14 @@ export default function PrivacyPolicyClientPage() {
                         <Mail className="h-5 w-5 text-primary" />
                         <div>
                           <p className="font-medium text-foreground">Email</p>
-                          <p className="text-sm">privacy@main.consulting.sa</p>
+                          <p className="text-sm">privacy@consulting.sa</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
                         <Globe className="h-5 w-5 text-primary" />
                         <div>
                           <p className="font-medium text-foreground">Website</p>
-                          <p className="text-sm">main.consulting.sa</p>
+                          <p className="text-sm">consulting.sa</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">

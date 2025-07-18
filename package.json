@@ -1,8 +1,8 @@
 {
-  "name": "main-consulting-website",
+  "name": "consulting-sa-website",
   "version": "2.0.0",
   "private": true,
-  "description": "Professional AI consulting services and SaaS solutions by Main Consulting",
+  "description": "Professional AI consulting services and SaaS solutions by consulting.sa (المستشار.السعودية)",
   "keywords": [
     "AI consulting",
     "artificial intelligence",
@@ -11,16 +11,17 @@
     "SaaS",
     "automation",
     "digital transformation",
-    "Asim Abu Salam",
-    "main.consulting.sa"
+    "Saudi Arabia",
+    "consulting.sa",
+    "المستشار.السعودية"
   ],
-  "homepage": "https://main.consulting.sa",
+  "homepage": "https://consulting.sa",
   "repository": {
     "type": "git",
-    "url": "https://github.com/main-consulting/website"
+    "url": "https://github.com/consulting-sa/website"
   },
   "license": "MIT",
-  "author": "Asim Abu Salam <asim@main.consulting.sa>",
+  "author": "consulting.sa <asim@consulting.sa>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

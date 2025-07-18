@@ -1,20 +1,20 @@
-# Main Consulting Website
+# consulting.sa Website (المستشار.السعودية)
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://main.consulting.sa)
+[![Deployed on Coolify](https://img.shields.io/badge/Deployed%20on-Coolify-blue?style=for-the-badge&logo=docker)](https://consulting.sa)
 [![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
-Professional AI consulting services and SaaS solutions website for Main Consulting, specializing in artificial intelligence, chatbots, AI agents, and digital transformation services.
+Professional AI consulting services and SaaS solutions website for **consulting.sa** (المستشار.السعودية), specializing in artificial intelligence, chatbots, AI agents, and digital transformation services in Saudi Arabia.
 
 ## 🚀 Live Website
 
-Visit our website: **[https://main.consulting.sa](https://main.consulting.sa)**
+Visit our website: **[https://consulting.sa](https://consulting.sa)**
 
 ## 📋 About
 
-Main Consulting provides cutting-edge AI consulting services including:
+**consulting.sa** (المستشار.السعودية) provides cutting-edge AI consulting services including:
 
 - **AI Strategy & Implementation** - Custom AI solutions for businesses
 - **Chatbot Development** - Intelligent conversational AI systems
@@ -94,7 +94,7 @@ Main Consulting provides cutting-edge AI consulting services including:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/main-consulting/website.git
+   git clone https://github.com/consulting-sa/website.git
    cd website
    ```
 
@@ -115,7 +115,7 @@ Main Consulting provides cutting-edge AI consulting services including:
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
    
    # Contact Configuration
-   NEXT_PUBLIC_CONTACT_EMAIL=asim@main.consulting.sa
+   NEXT_PUBLIC_CONTACT_EMAIL=asim@consulting.sa
    
    # Analytics (optional)
    NEXT_PUBLIC_GA_ID=your_google_analytics_id
@@ -187,7 +187,7 @@ Main Consulting provides cutting-edge AI consulting services including:
 |----------|-------------|----------|---------|
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL | Yes | - |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anonymous key | Yes | - |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Contact email address | No | asim@main.consulting.sa |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Contact email address | No | asim@consulting.sa |
 | `NEXT_PUBLIC_GA_ID` | Google Analytics ID | No | - |
 | `ANALYZE` | Enable bundle analyzer | No | false |
 
@@ -197,22 +197,24 @@ Customize your brand in `lib/brand.ts`:
 
 ```typescript
 export const brandConfig = {
-  name: "Main Consulting",
+  name: "consulting.sa",
+  nameArabic: "المستشار.السعودية",
   tagline: "AI Consulting & Digital Transformation",
+  taglineArabic: "استشارات الذكاء الاصطناعي والتحول الرقمي",
   description: "Professional AI consulting services and SaaS solutions",
-  url: "https://main.consulting.sa",
+  url: "https://consulting.sa",
   logo: {
     image: "/logo.webp",
     width: 40,
     height: 40,
   },
   contact: {
-    email: "asim@main.consulting.sa",
+    email: "asim@consulting.sa",
     phone: "+966-XXX-XXXX",
   },
   social: {
-    linkedin: "https://linkedin.com/company/main-consulting",
-    twitter: "https://twitter.com/mainconsulting",
+    linkedin: "https://linkedin.com/company/consulting-sa",
+    twitter: "https://twitter.com/consultingsa",
   },
 }
 ```
@@ -382,9 +384,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact & Support
 
 **Asim Abu Salam** - Lead Developer & AI Consultant
-- **Email**: asim@main.consulting.sa
-- **Website**: [main.consulting.sa](https://main.consulting.sa)
-- **LinkedIn**: [Main Consulting](https://linkedin.com/company/main-consulting)
+- **Email**: asim@consulting.sa
+- **Website**: [consulting.sa](https://consulting.sa)
+- **LinkedIn**: [consulting.sa](https://linkedin.com/company/consulting-sa)
 
 For technical support or business inquiries, please reach out via email or through our website contact form.
 
@@ -404,4 +406,4 @@ For technical support or business inquiries, please reach out via email or throu
 
 ---
 
-**Built with ❤️ by Main Consulting Team**
+**Built with ❤️ by consulting.sa Team (المستشار.السعودية)**

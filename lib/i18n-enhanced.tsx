@@ -53,9 +53,9 @@ export const translations = {
     // Testimonials
     "testimonials.title": "What Our Clients Say",
     "testimonials.subtitle": "We are proud to have helped so many businesses succeed. Here's what some of our clients have to say about us.",
-    "testimonials.quote1": "POTS has been a game-changer for our business. Their AI-powered solutions have helped us automate our workflows and improve our efficiency.",
-    "testimonials.quote2": "The team at POTS is top-notch. They are experts in their field and have been a pleasure to work with. I would highly recommend them to anyone looking for IT consulting services.",
-    "testimonials.quote3": "We were looking for a way to engage with our customers more effectively, and POTS delivered. Their chatbots have helped us improve our customer satisfaction and increase our sales.",
+    "testimonials.quote1": "consulting.sa has been a game-changer for our business. Their AI-powered solutions have helped us automate our workflows and improve our efficiency.",
+    "testimonials.quote2": "The team at consulting.sa is top-notch. They are experts in their field and have been a pleasure to work with. I would highly recommend them to anyone looking for AI consulting services.",
+    "testimonials.quote3": "We were looking for a way to engage with our customers more effectively, and consulting.sa delivered. Their chatbots have helped us improve our customer satisfaction and increase our sales.",
 
     // Services Page
     "servicesPage.title": "Our Services",
@@ -183,9 +183,9 @@ export const translations = {
     // Testimonials
     "testimonials.title": "ماذا يقول عملاؤنا",
     "testimonials.subtitle": "نحن فخورون بمساعدة العديد من الشركات على النجاح. إليك ما يقوله بعض عملائنا عنا.",
-    "testimonials.quote1": "لقد كان POTS بمثابة تغيير جذري في أعمالنا. لقد ساعدتنا حلولهم التي تعمل بالذكاء الاصطناعي على أتمتة سير العمل لدينا وتحسين كفاءتنا.",
-    "testimonials.quote2": "فريق POTS من الطراز الأول. إنهم خبراء في مجالهم وكان من دواعي سروري العمل معهم. أوصي بهم بشدة لأي شخص يبحث عن خدمات استشارات تكنولوجيا المعلومات.",
-    "testimonials.quote3": "كنا نبحث عن طريقة للتفاعل مع عملائنا بشكل أكثر فعالية ، وقد نجحت POTS في ذلك. لقد ساعدتنا روبوتات الدردشة الخاصة بهم على تحسين رضا عملائنا وزيادة مبيعاتنا.",
+    "testimonials.quote1": "لقد كان المستشار.السعودية بمثابة تغيير جذري في أعمالنا. لقد ساعدتنا حلولهم التي تعمل بالذكاء الاصطناعي على أتمتة سير العمل لدينا وتحسين كفاءتنا.",
+    "testimonials.quote2": "فريق المستشار.السعودية من الطراز الأول. إنهم خبراء في مجالهم وكان من دواعي سروري العمل معهم. أوصي بهم بشدة لأي شخص يبحث عن خدمات استشارات الذكاء الاصطناعي.",
+    "testimonials.quote3": "كنا نبحث عن طريقة للتفاعل مع عملائنا بشكل أكثر فعالية ، وقد نجح المستشار.السعودية في ذلك. لقد ساعدتنا روبوتات الدردشة الخاصة بهم على تحسين رضا عملائنا وزيادة مبيعاتنا.",
 
     // Services Page
     "servicesPage.title": "خدماتنا",

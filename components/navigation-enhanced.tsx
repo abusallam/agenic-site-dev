@@ -54,7 +54,7 @@ export function EnhancedNavigation() {
               style={{ width: "auto", height: "auto" }}
             />
             <span className="text-xl font-bold font-heading bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              {brandConfig.name}
+              {locale === "ar" ? brandConfig.nameArabic : brandConfig.name}
             </span>
           </Link>
 
