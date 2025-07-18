@@ -6,6 +6,8 @@ import "../styles/animations.css"
 import { ThemeProvider } from "@/components/theme-provider-enhanced"
 import { TranslationProvider } from "@/lib/i18n-enhanced"
 import { Toaster } from "@/components/ui/toaster"
+import { ErrorBoundary } from "@/components/error-boundary"
+import PerformanceMonitor from "@/components/performance-monitor"
 import { brandConfig } from "@/lib/brand"
 
 const inter = Inter({
@@ -63,12 +65,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${cairo.variable} font-sans antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <TranslationProvider>
-            {children}
-            <Toaster />
-          </TranslationProvider>
-        </ThemeProvider>
+        <ErrorBoundary>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <TranslationProvider>
+              {children}
+              <Toaster />
+              <PerformanceMonitor />
+            </TranslationProvider>
+          </ThemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   )

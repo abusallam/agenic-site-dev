@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
 import { EnhancedNavigation } from "@/components/navigation-enhanced"
 import { EnhancedFooter } from "@/components/footer-enhanced"
-import { ArrowRight, Users, CheckCircle, Clock, Star, Brain, Target, Lightbulb, Shield, BarChart3, Cog, Users2, MessageSquare } from "lucide-react"
+import { ArrowRight, Users, CheckCircle, Clock, Star, Brain, Target, Lightbulb, Shield, BarChart3, Cog, Users2, MessageSquare, Award, Code, Database, Zap, Globe, Settings, TrendingUp, Cpu } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export default function ConsultingClientPage() {
@@ -83,6 +83,78 @@ export default function ConsultingClientPage() {
       icon: MessageSquare,
       metric: "60%",
       metricLabel: "Response Time Reduction",
+    },
+  ]
+
+  const saasServices = [
+    {
+      icon: Database,
+      title: "Data Analytics Platform",
+      description: "Advanced analytics and business intelligence solutions for data-driven decision making.",
+      features: ["Real-time Analytics", "Custom Dashboards", "Predictive Modeling", "Data Visualization"],
+    },
+    {
+      icon: Cpu,
+      title: "AI Model Development",
+      description: "Custom AI model development and deployment for specific business needs.",
+      features: ["Machine Learning", "Deep Learning", "Model Training", "API Integration"],
+    },
+    {
+      icon: Globe,
+      title: "Cloud Integration",
+      description: "Seamless cloud integration and migration services for scalable solutions.",
+      features: ["AWS/Azure Setup", "Cloud Migration", "Scalability", "Security"],
+    },
+    {
+      icon: Settings,
+      title: "Process Automation",
+      description: "Intelligent automation solutions to streamline business processes.",
+      features: ["Workflow Automation", "RPA Solutions", "Integration", "Monitoring"],
+    },
+  ]
+
+  const achievements = [
+    {
+      icon: Award,
+      title: "Certified AI Consultant",
+      description: "Advanced certification in AI and machine learning technologies",
+      year: "2023",
+    },
+    {
+      icon: Code,
+      title: "Full Stack Developer",
+      description: "Expert in modern web technologies and frameworks",
+      year: "2022",
+    },
+    {
+      icon: TrendingUp,
+      title: "Project Manager",
+      description: "Certified project management professional with proven track record",
+      year: "2021",
+    },
+    {
+      icon: Users2,
+      title: "AI Specialist",
+      description: "Specialized in artificial intelligence and automation solutions",
+      year: "2020",
+    },
+  ]
+
+  const insights = [
+    {
+      title: "AI Implementation Strategy",
+      description: "Best practices for implementing AI solutions in enterprise environments with focus on ROI and scalability.",
+      readTime: "5 min read",
+    },
+    {
+      title: "Digital Transformation Roadmap",
+      description: "Step-by-step guide to successful digital transformation initiatives for modern businesses.",
+      readTime: "8 min read",
+    },
+    {
+      title: "Automation Success Stories",
+      description: "Real-world case studies showcasing successful automation implementations across industries.",
+      readTime: "6 min read",
     },
   ]
 
@@ -278,8 +350,151 @@ export default function ConsultingClientPage() {
           </div>
         </section>
 
-        {/* Contact Section */}
+        {/* SaaS Services Section */}
         <section className="py-20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              {/* Header */}
+              <div className="text-center mb-16 space-y-4">
+                <h2 className="text-3xl sm:text-4xl font-bold font-heading">SaaS Services To Offer</h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Comprehensive software-as-a-service solutions designed to accelerate your digital transformation
+                </p>
+              </div>
+
+              {/* SaaS Services Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {saasServices.map((service, index) => (
+                  <Card
+                    key={index}
+                    className="group hover-lift glass-effect border-0 bg-background/50 relative overflow-hidden animate-fade-in-up"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                          <service.icon className="h-6 w-6 text-primary" />
+                        </div>
+                      </div>
+                      <CardTitle className="text-xl group-hover:text-primary transition-colors">{service.title}</CardTitle>
+                      <CardDescription className="text-base">{service.description}</CardDescription>
+                    </CardHeader>
+
+                    <CardContent className="space-y-4">
+                      {/* Features List */}
+                      <ul className="space-y-2">
+                        {service.features.map((feature, featureIndex) => (
+                          <li key={featureIndex} className="flex items-center gap-2 text-sm">
+                            <CheckCircle className="h-4 w-4 text-primary flex-shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+
+                    {/* Hover Glow Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Insights Section */}
+        <section className="py-20 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              {/* Header */}
+              <div className="text-center mb-16 space-y-4">
+                <h2 className="text-3xl sm:text-4xl font-bold font-heading">Insights</h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Expert insights and thought leadership on AI, automation, and digital transformation
+                </p>
+              </div>
+
+              {/* Insights Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {insights.map((insight, index) => (
+                  <Card
+                    key={index}
+                    className="group hover-lift glass-effect border-0 bg-background/50 relative overflow-hidden animate-fade-in-up"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                          <Lightbulb className="h-6 w-6 text-primary" />
+                        </div>
+                        <Badge variant="outline">{insight.readTime}</Badge>
+                      </div>
+                      <CardTitle className="text-lg group-hover:text-primary transition-colors">{insight.title}</CardTitle>
+                      <CardDescription className="text-sm">{insight.description}</CardDescription>
+                    </CardHeader>
+
+                    <CardContent>
+                      <Button variant="ghost" size="sm" className="p-0 h-auto text-primary hover:text-primary/80">
+                        Read More <ArrowRight className="ml-1 h-3 w-3" />
+                      </Button>
+                    </CardContent>
+
+                    {/* Hover Glow Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Achievements Section */}
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              {/* Header */}
+              <div className="text-center mb-16 space-y-4">
+                <h2 className="text-3xl sm:text-4xl font-bold font-heading">My Achievements</h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Professional certifications and expertise that drive exceptional results
+                </p>
+              </div>
+
+              {/* Achievements Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {achievements.map((achievement, index) => (
+                  <Card
+                    key={index}
+                    className="group hover-lift glass-effect border-0 bg-background/50 relative overflow-hidden animate-fade-in-up text-center"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <CardContent className="p-6">
+                      <div className="flex flex-col items-center space-y-4">
+                        <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                          <achievement.icon className="h-8 w-8 text-primary" />
+                        </div>
+                        <div className="space-y-2">
+                          <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">
+                            {achievement.title}
+                          </h3>
+                          <p className="text-sm text-muted-foreground">{achievement.description}</p>
+                          <Badge variant="secondary" className="text-xs">
+                            {achievement.year}
+                          </Badge>
+                        </div>
+                      </div>
+                    </CardContent>
+
+                    {/* Hover Glow Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section className="py-20 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center space-y-8">
               <h2 className="text-3xl sm:text-4xl font-bold font-heading">{t("consultingPage.contact.title")}</h2>
