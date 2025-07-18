@@ -27,7 +27,7 @@ export function EnhancedNavigation() {
   const navItems = [
     { href: "/", label: t("nav.home") },
     { href: "/services", label: t("nav.services") },
-    { href: "/pricing", label: t("nav.pricing") },
+    { href: "/privacy-policy", label: t("footer.privacy") },
     { href: "/consulting", label: t("nav.consulting") },
     { href: "/documentation", label: t("nav.documentation") },
     { href: "/about", label: t("nav.about") },
