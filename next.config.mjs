@@ -5,6 +5,7 @@ const { withPlugins } = nextComposePlugins;
 const withImagesPlugin = nextImages;
 
 const nextConfig = {
+  output: 'standalone',
   images: {
     remotePatterns: [
       {
