@@ -1,14 +1,11 @@
 import nextComposePlugins from 'next-compose-plugins'
 import nextImages from 'next-images'
-import bundleAnalyzer from '@next/bundle-analyzer'
 
 const { withPlugins } = nextComposePlugins
 const withImagesPlugin = nextImages
 
-// Bundle analyzer for performance optimization
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-})
+// Bundle analyzer is optional - only used for development analysis
+const withBundleAnalyzer = (config) => config
 
 const nextConfig = {
   // Output configuration for Docker deployment
