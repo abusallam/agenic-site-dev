@@ -18,8 +18,8 @@ export const brandConfig = {
     light: "#F8F9FA", // Light Neutral
   },
   contact: {
-    email: "asim@consulting.sa",
-    phone: "+966 XX XXX XXXX",
+    email: "consulting.sa",
+    phone: "+966570707070",
     address: "Saudi Arabia",
     addressArabic: "المملكة العربية السعودية",
     hours: "Available Mon-Fri, 9AM-6PM AST",
