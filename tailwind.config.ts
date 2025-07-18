@@ -60,9 +60,10 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        heading: ["var(--font-cairo)", "var(--font-inter)", "system-ui", "sans-serif"],
-        arabic: ["var(--font-cairo)", "system-ui", "sans-serif"],
+        sans: ["var(--font-bitter)", "system-ui", "sans-serif"],
+        heading: ["var(--font-bitter)", "system-ui", "sans-serif"],
+        arabic: ["var(--font-noto-arabic)", "system-ui", "sans-serif"],
+        body: ["var(--font-bitter)", "system-ui", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
