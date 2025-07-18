@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { useEnhancedTranslation } from "@/lib/i18n-enhanced"
 import { EnhancedNavigation } from "@/components/navigation-enhanced"
 import { EnhancedFooter } from "@/components/footer-enhanced"
-import { ArrowRight, Users, CheckCircle, Clock, Star, Brain, Target, Lightbulb, Shield, BarChart3, Cog, Users2, MessageSquare, Award, Code, Database, Zap, Globe, Settings, TrendingUp, Cpu } from "lucide-react"
+import { ArrowRight, Users, CheckCircle, Clock, Star, Brain, Target, Lightbulb, Shield, BarChart3, Cog, Users2, MessageSquare, Award, Code, Database, Globe, Settings, TrendingUp, Cpu } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export default function ConsultingClientPage() {
