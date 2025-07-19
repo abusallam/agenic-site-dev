@@ -1,51 +1,26 @@
+"""
+Mock Authentication Service
 
-from supabase import Client
-from .supabase_client import get_supabase_client
+This module provides a mock authentication service for the ADK Agent.
+In a real-world scenario, this would integrate with an actual authentication
+provider (e.g., via SMS, email, or WhatsApp).
+"""
 
-class AuthService:
-    def __init__(self):
-        self.supabase: Client = get_supabase_client()
+def authenticate_user(user_identifier: str, otp: str) -> bool:
+    """
+    Simulates user authentication.
 
-    async def sign_up(self, email, password, user_data):
-        try:
-            response = self.supabase.auth.sign_up({
-                "email": email,
-                "password": password,
-                "options": {
-                    "data": user_data
-                }
-            })
-            return response
-        except Exception as e:
-            return {"error": str(e)}
+    In this mock version, it always returns True to simulate a successful
+    authentication, regardless of the input.
 
-    async def sign_in(self, email, password):
-        try:
-            response = self.supabase.auth.sign_in_with_password({
-                "email": email,
-                "password": password
-            })
-            return response
-        except Exception as e:
-            return {"error": str(e)}
+    Args:
+        user_identifier: The user's identifier (e.g., phone number, email).
+        otp: The one-time password provided by the user.
 
-    async def sign_out(self):
-        try:
-            response = self.supabase.auth.sign_out()
-            return response
-        except Exception as e:
-            return {"error": str(e)}
-
-    async def get_current_user(self):
-        try:
-            response = self.supabase.auth.get_user()
-            return response
-        except Exception as e:
-            return {"error": str(e)}
-
-    async def reset_password(self, email):
-        try:
-            response = self.supabase.auth.reset_password_for_email(email)
-            return response
-        except Exception as e:
-            return {"error": str(e)}
+    Returns:
+        True if authentication is successful, False otherwise.
+    """
+    print(f"Attempting to authenticate user: {user_identifier}")
+    # In a real implementation, you would verify the OTP here.
+    # For this mock service, we will always consider it successful.
+    return True
