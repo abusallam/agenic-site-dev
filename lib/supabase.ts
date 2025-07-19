@@ -63,101 +63,117 @@ export interface User {
   updated_at?: string
 }
 
+const API_URL = 'http://localhost:8000';
+
 // Auth helper functions with error handling
 export const authHelpers = {
   async signUp(email: string, password: string, userData: Partial<User>) {
     try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: userData,
-        },
-      })
-      return { data, error }
+      const response = await fetch(`${API_URL}/auth/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, user_data: userData }),
+      });
+      return await response.json();
     } catch {
-      return { data: null, error: { message: "Authentication service unavailable" } }
+      return { data: null, error: { message: "Authentication service unavailable" } };
     }
   },
 
   async signIn(email: string, password: string) {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      })
-      return { data, error }
+      const response = await fetch(`${API_URL}/auth/signin`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      return await response.json();
     } catch {
-      return { data: null, error: { message: "Authentication service unavailable" } }
+      return { data: null, error: { message: "Authentication service unavailable" } };
     }
   },
 
   async signOut() {
     try {
-      const { error } = await supabase.auth.signOut()
-      return { error }
+      const response = await fetch(`${API_URL}/auth/signout`, {
+        method: 'POST',
+      });
+      return await response.json();
     } catch {
-      return { error: { message: "Authentication service unavailable" } }
+      return { error: { message: "Authentication service unavailable" } };
     }
   },
 
   async getCurrentUser() {
     try {
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.getUser()
-      return { user, error }
+      const response = await fetch(`${API_URL}/auth/user`);
+      return await response.json();
     } catch {
-      return { user: null, error: { message: "Authentication service unavailable" } }
+      return { user: null, error: { message: "Authentication service unavailable" } };
     }
   },
 
   async resetPassword(email: string) {
     try {
-      const { data, error } = await supabase.auth.resetPasswordForEmail(email)
-      return { data, error }
+      const response = await fetch(`${API_URL}/auth/reset-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      return await response.json();
     } catch {
-      return { data: null, error: { message: "Authentication service unavailable" } }
+      return { data: null, error: { message: "Authentication service unavailable" } };
     }
   },
-}
+};
 
 // Database helper functions with error handling
 export const dbHelpers = {
   async submitContact(submission: ContactSubmission) {
     try {
-      const { data, error } = await supabase.from("contact_submissions").insert([submission]).select()
-      return { data, error }
+      const response = await fetch(`${API_URL}/db/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ submission }),
+      });
+      return await response.json();
     } catch {
-      return { data: null, error: { message: "Database service unavailable" } }
+      return { data: null, error: { message: "Database service unavailable" } };
     }
   },
 
   async subscribeNewsletter(email: string) {
     try {
-      const { data, error } = await supabase.from("newsletter_subscriptions").insert([{ email }]).select()
-      return { data, error }
+      const response = await fetch(`${API_URL}/db/newsletter`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      return await response.json();
     } catch {
-      return { data: null, error: { message: "Database service unavailable" } }
+      return { data: null, error: { message: "Database service unavailable" } };
     }
   },
 
   async getUserProfile(userId: string) {
     try {
-      const { data, error } = await supabase.from("user_profiles").select("*").eq("id", userId).single()
-      return { data, error }
+      const response = await fetch(`${API_URL}/db/user/${userId}`);
+      return await response.json();
     } catch {
-      return { data: null, error: { message: "Database service unavailable" } }
+      return { data: null, error: { message: "Database service unavailable" } };
     }
   },
 
   async updateUserProfile(userId: string, updates: Partial<User>) {
     try {
-      const { data, error } = await supabase.from("user_profiles").update(updates).eq("id", userId).select()
-      return { data, error }
+      const response = await fetch(`${API_URL}/db/user/${userId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ updates }),
+      });
+      return await response.json();
     } catch {
-      return { data: null, error: { message: "Database service unavailable" } }
+      return { data: null, error: { message: "Database service unavailable" } };
     }
   },
-}
+};
